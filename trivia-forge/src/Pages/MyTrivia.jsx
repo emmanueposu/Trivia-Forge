@@ -1,5 +1,5 @@
 import React from "react";
-import BootstrapTable from '../components/BootstrapTable';
+import BootstrapTable from '../Components/BootstrapTable';
 
 function MyTrivia() {
     return (
