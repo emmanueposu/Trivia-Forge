@@ -5,7 +5,8 @@ import OpenAI from "openai";
 // initialize openai client
 // reference: https://platform.openai.com/docs/api-reference/making-requests
 const openai = new OpenAI({
-    apiKey: process.env.REACT_APP_OPENAI_API_KEY,
+    // vite does not process 'process.env' like Create React APP, use import.meta.env
+    apiKey: import.meta.env.VITE_REACT_APP_OPENAI_API_KEY,
     dangerouslyAllowBrowser: true
 });
 
