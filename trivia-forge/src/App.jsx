@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Pages/HomePage";
 import Navigation from "./Components/Nav";
 import TriviaGenPage from './Pages/TriviaGenPage';
+import TriviaReviewPage from './Pages/TriviaReviewPage';
 import MyTrivia from './Pages/MyTrivia';
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -26,6 +27,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/triviaGen" element={<TriviaGenPage />} />
+            <Route path="/review" element={<TriviaReviewPage />} />
             <Route path="/myTrivia" element={<MyTrivia />} />
           </Routes>
 

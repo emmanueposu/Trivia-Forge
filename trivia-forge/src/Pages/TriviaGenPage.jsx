@@ -1,23 +1,25 @@
-import React, { useState } from "react";
+import React, { useState } from "react"; // variables that cause the component to re-render when they change
 import OpenAI from "openai";
+import { useNavigate } from "react-router-dom";
 
 
-// initialize openai client
+// initialize openai client using configuration specified in vite environment variables 
 // reference: https://platform.openai.com/docs/api-reference/making-requests
 const openai = new OpenAI({
-    // vite does not process 'process.env' like Create React APP, use import.meta.env
-    apiKey: import.meta.env.VITE_REACT_APP_OPENAI_API_KEY,
-    dangerouslyAllowBrowser: true
+    apiKey: import.meta.env.VITE_REACT_APP_OPENAI_API_KEY, // vite does not process 'process.env' like Create React APP, use import.meta.env
+    dangerouslyAllowBrowser: true // set to true to enable local testing (not recommended for production)
 });
 
 function TriviaGenPage() {
+    // state hooks for managaing number of questions and catergory input by user 
     const [numberOfQuestions, setNumberOfQuestions] = useState('');
     const [category, setCategory] = useState('');
+    const navigate = useNavigate();
     
 
 
     const handleSubmit = async (event) => {
-        event.preventDefault();
+        event.preventDefault(); // prevent default form submission behavior(browser reload)
 
         // api call
         try {
@@ -34,13 +36,15 @@ function TriviaGenPage() {
                 // temperature: .5
             });
             
-            console.log(completion.choices[0]);
+            const questions = completion.choices[0].message.content.split('\n'); // store trivia questions
+            navigate('/review', { state: { questions } });
+            //console.log(completion.choices[0]);
         } catch (error) {
             console.error('Error calling OpenAI API:', error);
         }
     };
 
-
+    // render component as a form
     return (
         <div>
             <h1>
