@@ -24,9 +24,9 @@ function TriviaGenPage() {
 
         let prompt = `Generate ${numberOfQuestions} trivia questions about ${category}.`;
         if (isMultipleChoice) {
-            prompt += " with four multiple-choice answers each followed by the correct answer";
+            prompt += "Each question should include four multiple-choice options, the correct answer, and a fun fact. Separate each component with a newline.";
         } else {
-            prompt += " with the answers for each";
+            prompt += "Each question should come with its answer and a fun fact. Separate each component with a newline.";
         }
 
         // api call
