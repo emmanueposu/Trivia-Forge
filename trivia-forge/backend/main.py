@@ -7,9 +7,9 @@ app = create_app()
 def test_supabase_connection():
     try:
         # Replace 'your_table' with an actual table name to test fetching data
-        supabase = app.config['CLIENT']  # Ensure this is consistent across your app
+        supabase = app.config['Client']  # Ensure this is consistent across your app
         data = supabase.table("Users").select("*").execute()
-        if data.status_code == 200:
+        if data:
             print("Data fetched successfully:", data.data)
             return True, "Database connection was successful."
         
@@ -19,10 +19,10 @@ def test_supabase_connection():
         print("An error occurred during the database connection:", e)
         return False, str(e)
 
-@app.route("/users", methods=['GET'])
+@app.route("/users", methods=['GET','POST'])
 def get_users():
-    supabase = app.config['CLIENT']
-    data = supabase.table("users").select("*").execute()
+    supabase = app.config['Client']
+    data = supabase.table("Users").select("*").execute()
     users = data.data
     # Assuming you have a function to serialize data as JSON
     return jsonify([serialize_user(user) for user in users])

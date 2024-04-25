@@ -10,10 +10,13 @@ def create_app():
     app = Flask(__name__)
     config = dotenv_values("./.env")
     url: str = config.get('SUPABASE_URL')
+    #print("url:",url)
     key: str = config.get('SUPABASE_KEY')
+    #print("key:",key)
     supabase: Client = create_client(url, key)
     app.config['Client'] = supabase
     return app
 
 
-
+if __name__ == '__main__':
+    create_app()
