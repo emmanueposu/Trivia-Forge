@@ -14,6 +14,7 @@ function TriviaGenPage() {
     // state hooks for managaing number of questions and catergory input by user 
     const [numberOfQuestions, setNumberOfQuestions] = useState('');
     const [category, setCategory] = useState('');
+    const [isMultipleChoice, setIsMultipleChoice] = useState(false);
     const navigate = useNavigate();
     
 
@@ -21,9 +22,15 @@ function TriviaGenPage() {
     const handleSubmit = async (event) => {
         event.preventDefault(); // prevent default form submission behavior(browser reload)
 
+        let prompt = `Generate ${numberOfQuestions} trivia questions about ${category}.`;
+        if (isMultipleChoice) {
+            prompt += " with four multiple-choice answers each followed by the correct answer";
+        } else {
+            prompt += " with the answers for each";
+        }
+
         // api call
         try {
-            const prompt = `Generate ${numberOfQuestions} trivia questions about ${category}.`;
 
             // API call to OpenAI
             const completion = await openai.chat.completions.create({
@@ -37,8 +44,9 @@ function TriviaGenPage() {
             });
             
             const questions = completion.choices[0].message.content.split('\n'); // store trivia questions
+            // state property to pass data as object to new route
             navigate('/review', { state: { questions } });
-            //console.log(completion.choices[0]);
+            //console.log(completion.choices[0].message);
         } catch (error) {
             console.error('Error calling OpenAI API:', error);
         }
@@ -74,8 +82,14 @@ function TriviaGenPage() {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="triviaAnswer">placeholder</label>
-                    <input type="text" className="form-control" id="triviaAnswer" placeholder="Place holder" />
+                    <label htmlFor="multipleChoice">Include Multiple Choice Answers:</label>
+                    <input 
+                        type="checkbox"
+                        checked={isMultipleChoice}
+                        onChange={e => setIsMultipleChoice(e.target.value)}
+                        //className="form-control" 
+                        id="multipleChoice" 
+                    />
                 </div>
                 <button type="submit" className="btn btn-primary">Generate</button>
             </form>

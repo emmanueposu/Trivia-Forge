@@ -2,6 +2,8 @@ import React from 'react';
 import { useLocation } from 'react-router-dom'; // used to access passed state
 
 function TriviaReviewPage() {
+	// Reference: https://reactrouter.com/en/main/hooks/use-location
+	// pulls object from state property in TriviaGenPage
 	const location = useLocation();
 	const { questions } = location.state;
 	
