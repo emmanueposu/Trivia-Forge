@@ -1,5 +1,4 @@
 import React from "react";
-// import Button from 'react-bootstrap/Button';
 
 function Home() {
     return (
@@ -9,7 +8,7 @@ function Home() {
                 <div class="justify-content-center d-flex text-start">
                     <form class="border rounded-4 p-5 col-5" id="customForm">
                         <label class="form-label">Game Name</label>
-                        <input type="text" class="form-control"></input>
+                        <input type="text" class="form-control" required></input>
                         <label class="form-label mt-3">Catgeories</label>
                         <div class="form-check">
                             <input type="checkbox" class="form-check-input" name="category"></input>
