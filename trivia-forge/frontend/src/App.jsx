@@ -33,7 +33,9 @@ function App() {
 
         </main>
 
-        <footer></footer>
+        <footer>
+          <p>© 2024 Trivia Forge. All rights reserved.</p>
+        </footer>
       </BrowserRouter>
     </div>
 
