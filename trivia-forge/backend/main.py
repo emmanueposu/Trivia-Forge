@@ -18,7 +18,15 @@ def test_supabase_connection():
     except Exception as e:
         print("An error occurred during the database connection:", e)
         return False, str(e)
-
+def serialize_user(user):
+    """Convert user dictionary to a JSON serializable format."""
+    return {
+        "id": user.get("id"),
+        "name": user.get("name"),
+        "email": user.get("email")
+        # Add more fields as needed based on your database structure
+    }
+    
 @app.route("/users", methods=['GET','POST'])
 def get_users():
     supabase = app.config['Client']
@@ -31,6 +39,8 @@ def get_users():
 def test():
     success, message = test_supabase_connection()
     return jsonify({"success": success, "message": message})
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
