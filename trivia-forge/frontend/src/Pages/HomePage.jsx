@@ -1,24 +1,41 @@
 import React from "react";
 import { Button, Container, Row, Col} from 'react-bootstrap';
 import '../App.css';
-import { FaRegFolderOpen } from "react-icons/fa";
+import { FaRegFolderOpen, FaPlusCircle, FaUserCircle, FaUserPlus } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
+    const navigate = useNavigate();
+
     return (
         <Container className="homepage-container">
             <Row>
                 <Col>
-                    <h1>Trivia Forge</h1>
-                </Col>
+                    <svg class="header-animation">
+                        <text x="50%" y="50%" dy=".35em" text-anchor="middle">
+			                Trivia Forge
+		                </text>
+                    </svg>
+                </Col >
             </Row>
-            <Row >
+            <Row>
                 <Col>
                     <Button variant="primary"> <FaRegFolderOpen /> My Trivia Games </Button>
                 </Col>
             </Row>
             <Row>
                 <Col>
-                    <Button variant="primary">Create New Game </Button>
+                    <Button variant="primary" onClick={() => navigate('/triviagen')}> <FaPlusCircle /> Create New Game </Button>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <Button variant="primary"> <FaUserCircle /> Login </Button>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <Button variant="primary"> <FaUserPlus /> Sign Up </Button>
                 </Col>
             </Row>
         </Container>
