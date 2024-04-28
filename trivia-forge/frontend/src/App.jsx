@@ -8,13 +8,14 @@ import Navigation from "./Components/Nav";
 import TriviaGenPage from './Pages/TriviaGenPage';
 import TriviaReviewPage from './Pages/TriviaReviewPage';
 import MyTrivia from './Pages/MyTrivia';
+import SignUpPage from './Pages/SignUpPage';
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+let signedIn = false;
 
 function App() {
   const [count, setCount] = useState(0)
-
   return (
 
     <div className="App">
@@ -29,6 +30,7 @@ function App() {
             <Route path="/triviaGen" element={<TriviaGenPage />} />
             <Route path="/review" element={<TriviaReviewPage />} />
             <Route path="/myTrivia" element={<MyTrivia />} />
+            <Route path="/SignUpPage" element={<SignUpPage />} />
           </Routes>
 
         </main>

@@ -26,7 +26,7 @@ def serialize_user(user):
         "email": user.get("email")
         # Add more fields as needed based on your database structure
     }
-    
+    #random comment
 @app.route("/users", methods=['GET','POST'])
 def get_users():
     supabase = app.config['Client']
