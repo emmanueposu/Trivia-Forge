@@ -51,3 +51,15 @@ footer{
   text-align: center;
   width: 100%;
 }
+
+.homepage-container .row {
+  justify-content: center;
+}
+
+.homepage-container .col {
+  margin: 10px;
+}
+
+.homepage-container .button {
+  background-color: #e0d6b7;
+}
