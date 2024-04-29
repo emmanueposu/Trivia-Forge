@@ -1,5 +1,0 @@
-# use command <pip install -r requirements.txt> to install the following
-
-flask
-supabase
-python-dotenv
