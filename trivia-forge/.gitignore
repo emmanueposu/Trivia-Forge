@@ -15,6 +15,9 @@ dist-ssr
 *.local
 openai-env
 
+__pycache__
+.venv
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
