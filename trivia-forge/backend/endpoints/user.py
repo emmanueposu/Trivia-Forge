@@ -38,7 +38,7 @@ def post_get_users():
 
 
 @bp.route('/<user_id>', methods=['GET', 'PATCH', 'DELETE'])
-def get_patch_delete(user_id):
+def get_patch_delete_user(user_id):
     query = supabase.table("Users").select("*").eq("id", user_id).execute()
     user = query.data
     if not user:
