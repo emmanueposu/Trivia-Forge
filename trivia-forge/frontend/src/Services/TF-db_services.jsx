@@ -1,6 +1,7 @@
 import axios from 'axios';
 import User from '../Models/User';
 import Game from '../Models/Game';
+import Question from '../Models/Question';
 
 const API_URL = 'http://localhost:5000/api';
 
@@ -8,7 +9,7 @@ const API_URL = 'http://localhost:5000/api';
 
 export const getUser = async () => {
     try {
-        const response = await axios.get(`${API_URL}/user`);
+        const response = await axios.get(`${API_URL}/users`);
         const { id, date, email, password, profilePic } = response.data;
         return new User(id, date, email, password, profilePic);
     } catch (error) {
@@ -19,7 +20,7 @@ export const getUser = async () => {
 
 export const addUser = async (user) => {
     try {
-        const response = await axios.post(`${API_URL}/user`, user.toJsonObject());
+        const response = await axios.post(`${API_URL}/users`, user.toJsonObject());
         return response.data;
     } catch (error) {
         console.error('Failed to add user');
@@ -29,7 +30,7 @@ export const addUser = async (user) => {
 
 export const deleteUser = async (User) => {
     try {
-        const response = await axios.delete(`${API_URL}/user/${User.id}`);
+        const response = await axios.delete(`${API_URL}/users/${User.id}`);
         return response.data;
     } catch (error) {
         console.error('Failed to delete user');
@@ -39,7 +40,7 @@ export const deleteUser = async (User) => {
 
 export const updateUser = async (user) => {
     try {
-        const response = await axios.put(`${API_URL}/user/${user.id}`, user.toJsonObject());
+        const response = await axios.put(`${API_URL}/users/${user.id}`, user.toJsonObject());
         return response.data;
     } catch (error) {
         console.error('Failed to update user');
@@ -53,7 +54,7 @@ export const updateUser = async (user) => {
 
 export const getGame = async () => {
     try {
-        const response = await axios.get(`${API_URL}/game`);
+        const response = await axios.get(`${API_URL}/games`);
         const { id, date, name, userID, questions } = response.data;
         return new Game(id, date, name, userID, questions);
     } catch (error) {
@@ -64,7 +65,7 @@ export const getGame = async () => {
 
 export const addGame = async (game) => {
     try {
-        const response = await axios.post(`${API_URL}/game`, game.toJsonObject());
+        const response = await axios.post(`${API_URL}/games`, game.toJsonObject());
         return response.data;
     } catch (error) {
         console.error('Failed to add game');
@@ -74,7 +75,7 @@ export const addGame = async (game) => {
 
 export const deleteGame = async (game) => {
     try {
-        const response = await axios.delete(`${API_URL}/game/${game.id}`);
+        const response = await axios.delete(`${API_URL}/games/${game.id}`);
         return response.data;
     } catch (error) {
         console.error('Failed to delete game');
@@ -84,7 +85,7 @@ export const deleteGame = async (game) => {
 
 export const updateGame = async (game) => {
     try {
-        const response = await axios.put(`${API_URL}/game/${game.id}`, game.toJsonObject());
+        const response = await axios.put(`${API_URL}/games/${game.id}`, game.toJsonObject());
         return response.data;
     } catch (error) {
         console.error('Failed to update game');
@@ -151,7 +152,7 @@ export const getCategories = async () => {
 
 export const addCategory = async (category) => {
     try {
-        const response = await axios.post(`${API_URL}/categories`, category);
+        const response = await axios.post(`${API_URL}/categories`, category.toJsonObject());
         return response.data;
     } catch (error) {
         console.error('Failed to add category');
@@ -159,9 +160,9 @@ export const addCategory = async (category) => {
     }
 }
 
-export const deleteCategory = async (categoryId) => {
+export const deleteCategory = async (category) => {
     try {
-        const response = await axios.delete(`${API_URL}/categories/${categoryId}`);
+        const response = await axios.delete(`${API_URL}/categories/${category.id}`);
         return response.data;
     } catch (error) {
         console.error('Failed to delete category');
@@ -169,9 +170,9 @@ export const deleteCategory = async (categoryId) => {
     }
 }
 
-export const updateCategory = async (categoryId, category) => {
+export const updateCategory = async (category) => {
     try {
-        const response = await axios.put(`${API_URL}/categories/${categoryId}`, category);
+        const response = await axios.put(`${API_URL}/categories/${category.id}`, category.toJsonObject());
         return response.data;
     } catch (error) {
         console.error('Failed to update category');
@@ -185,7 +186,7 @@ export const updateCategory = async (categoryId, category) => {
 
 export const getChoice = async () => {
     try {
-        const response = await axios.get(`${API_URL}/choice`);
+        const response = await axios.get(`${API_URL}/choices`);
         return response.data;
     } catch (error) {
         console.error('Failed to fetch choice');
@@ -195,7 +196,7 @@ export const getChoice = async () => {
 
 export const addChoice = async (choice) => {
     try {
-        const response = await axios.post(`${API_URL}/choice`, choice);
+        const response = await axios.post(`${API_URL}/choices`, choice.toJsonObject());
         return response.data;
     } catch (error) {
         console.error('Failed to add choice');
@@ -203,9 +204,9 @@ export const addChoice = async (choice) => {
     }
 }
 
-export const deleteChoice = async (choiceId) => {
+export const deleteChoice = async (choice) => {
     try {
-        const response = await axios.delete(`${API_URL}/choice/${choiceId}`);
+        const response = await axios.delete(`${API_URL}/choices/${choice.id}`);
         return response.data;
     } catch (error) {
         console.error('Failed to delete choice');
@@ -213,9 +214,9 @@ export const deleteChoice = async (choiceId) => {
     }
 }
 
-export const updateChoice = async (choiceId, choice) => {
+export const updateChoice = async (choice) => {
     try {
-        const response = await axios.put(`${API_URL}/choice/${choiceId}`, choice);
+        const response = await axios.put(`${API_URL}/choices/${choice.id}`, choice.toJsonObject());
         return response.data;
     } catch (error) {
         console.error('Failed to update choice');

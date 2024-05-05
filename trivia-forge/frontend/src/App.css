@@ -5,29 +5,52 @@
 
 /* Header Animation */
 .header-animation {
-	font-family: "Russo One", sans-serif;
-	width: 100%; height: 100%;
-}
-.header-animation text {
-	animation: stroke 5s infinite alternate;
-	stroke-width: 2;
-	stroke: #365FA0;
-	font-size: 100px;
-}
-@keyframes stroke {
-	0%   {
-		fill: rgba(72,138,204,0); stroke: rgba(54,95,160,1);
-		stroke-dashoffset: 25%; stroke-dasharray: 0 50%; stroke-width: 2;
-	}
-	70%  {fill: rgba(72,138,204,0); stroke: rgba(54,95,160,1); }
-	80%  {fill: rgba(72,138,204,0); stroke: rgba(54,95,160,1); stroke-width: 3; }
-	100% {
-		fill: rgba(72,138,204,1); stroke: rgba(54,95,160,0);
-		stroke-dashoffset: -25%; stroke-dasharray: 50% 0; stroke-width: 0;
-	}
+  font-family: "Russo One", sans-serif;
+  width: 100%;
+  height: 100%;
 }
 
-.wrapper {background-color: #FFFFFF};
+.header-animation text {
+  animation: stroke 5s infinite alternate;
+  stroke-width: 2;
+  stroke: #365FA0;
+  font-size: 100px;
+}
+
+@keyframes stroke {
+  0% {
+    fill: rgba(72, 138, 204, 0);
+    stroke: rgba(54, 95, 160, 1);
+    stroke-dashoffset: 25%;
+    stroke-dasharray: 0 50%;
+    stroke-width: 2;
+  }
+
+  70% {
+    fill: rgba(72, 138, 204, 0);
+    stroke: rgba(54, 95, 160, 1);
+  }
+
+  80% {
+    fill: rgba(72, 138, 204, 0);
+    stroke: rgba(54, 95, 160, 1);
+    stroke-width: 3;
+  }
+
+  100% {
+    fill: rgba(72, 138, 204, 1);
+    stroke: rgba(54, 95, 160, 0);
+    stroke-dashoffset: -25%;
+    stroke-dasharray: 50% 0;
+    stroke-width: 0;
+  }
+}
+
+.wrapper {
+  background-color: #FFFFFF
+}
+
+;
 /* End Header Animation  */
 
 .App {
@@ -106,7 +129,8 @@ footer {
   border: 3px solid #ee7600;
   font-family: 'Fredoka One', cursive;
   font-size: 40px;
-  border-radius: 70px; /* Rounded corners */
+  border-radius: 70px;
+  /* Rounded corners */
   box-shadow: 0 8px #999;
   /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.1); */
   width: 40%;
