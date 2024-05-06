@@ -1,8 +1,9 @@
 export class Question {
-    constructor(id, question, answer, categoryID) {
-        this.id = id;
+    constructor(question, answer, hint, categoryID = null) {
+        this.id = null;
         this.question = question;
         this.answer = answer;
+        this.hint = hint;
         this.categoryID = categoryID;
         this.choices = [];
     }

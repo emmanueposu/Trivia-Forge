@@ -1,6 +1,10 @@
 import React, { useState } from "react"; // variables that cause the component to re-render when they change
 import OpenAI from "openai";
+import { Game } from "../Model/Game";
 import { useNavigate } from "react-router-dom";
+import { Question } from "../Model/Question";
+import { Choice } from "../Model/Choice";
+import { Category } from "../Model/Category";
 
 
 // initialize openai client using configuration specified in vite environment variables 
@@ -16,17 +20,17 @@ function TriviaGenPage() {
     const [category, setCategory] = useState('');
     const [isMultipleChoice, setIsMultipleChoice] = useState(false);
     const navigate = useNavigate();
-    
+
 
 
     const handleSubmit = async (event) => {
         event.preventDefault(); // prevent default form submission behavior(browser reload)
-
+        //for each category 
         let prompt = `Generate ${numberOfQuestions} trivia questions about ${category}.`;
         if (isMultipleChoice) {
-            prompt += "Each question should include four multiple-choice options, the correct answer, and a fun fact. Separate each component with a newline.";
+            prompt += "Each question should be in the format Question:...\nChoice:...\nChoice:...\nChoice:...\nChoice:...\nAnswer:...\nHint:...\n---\nQuestion:... ect. include four multiple-choice options";
         } else {
-            prompt += "Each question should come with its answer and a fun fact. Separate each component with a newline.";
+            prompt += "Each question should be in the format \nQuestion:...\nAnswer:...\n---\nQuestion:... ect.";
         }
 
         // api call
@@ -35,17 +39,48 @@ function TriviaGenPage() {
             // API call to OpenAI
             const completion = await openai.chat.completions.create({
                 model: "gpt-3.5-turbo",
-                messages: [{role: "user", content: prompt }],
+                messages: [{ role: "user", content: prompt }],
                 // adjust and use token limit if necessary
                 // max_tokens: 200
                 // implment and adjust temperature if needed
                 // temperature scale is 0-1 and used to tune randomness of output
                 // temperature: .5
             });
-            
-            const questions = completion.choices[0].message.content.split('\n'); // store trivia questions
+            //create a new game and category object and add category to game
+            let game = new Game();
+            let newCategory = new Category(category);
+            game.addCategory(newCategory);
+
+            //parse response from API
+            let sections = completion.choices[0].message.content.split('\n'); // store trivia questions
+            for (let i = 0; i < sections.length; i++) {
+                if (sections[i] === '') { sections.splice(i, 1); }
+            }
+            //loop through sections and create question and choice objects
+            for (let i = 0; i < sections.length; i += 7) {
+                let question = sections[i];
+                let choices = [];
+                for (let k = 0; k < 4; k++) {
+                    let choice = sections[i + k + 1];
+                    let newChoice = new Choice(choice);
+                    choices.push(newChoice);
+                }
+                let answer = sections[i + 5];
+                let hint = sections[i + 6];
+
+                //create question object and add it to category
+                let newQuestion = new Question(question, answer, hint);
+                newCategory.addQuestion(newQuestion);
+
+                //add choices to question object
+                for (let i = 0; i < choices.length; i++) {
+                    newQuestion.addChoice(choices[i]);
+                }
+
+
+            }
             // state property to pass data as object to new route
-            navigate('/review', { state: { questions } });
+            navigate('/review', { state: { game } });
             //console.log(completion.choices[0].message);
         } catch (error) {
             console.error('Error calling OpenAI API:', error);
@@ -61,34 +96,34 @@ function TriviaGenPage() {
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="triviaTitle">Number of Questions:</label>
-                    <input 
+                    <input
                         type="number"
                         value={numberOfQuestions}
                         onChange={e => setNumberOfQuestions(Math.min(10, Math.max(1, parseInt(e.target.value, 10))))}
-                        className="form-control" 
-                        id="triviaTitle" 
-                        placeholder="Number of Questions" 
+                        className="form-control"
+                        id="triviaTitle"
+                        placeholder="Number of Questions"
                     />
                 </div>
                 <div className="form-group">
                     <label htmlFor="triviaCategory">Category:</label>
-                    <input 
+                    <input
                         type="text"
                         value={category}
                         onChange={e => setCategory(e.target.value)}
-                        className="form-control" 
-                        id="triviaCategory" 
-                        placeholder="Category" 
+                        className="form-control"
+                        id="triviaCategory"
+                        placeholder="Category"
                     />
                 </div>
                 <div className="form-group">
                     <label htmlFor="multipleChoice">Include Multiple Choice Answers:</label>
-                    <input 
+                    <input
                         type="checkbox"
                         checked={isMultipleChoice}
                         onChange={e => setIsMultipleChoice(e.target.value)}
                         //className="form-control" 
-                        id="multipleChoice" 
+                        id="multipleChoice"
                     />
                 </div>
                 <button type="submit" className="btn btn-primary">Generate</button>

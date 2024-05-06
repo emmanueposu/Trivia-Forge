@@ -1,6 +1,6 @@
 export class Choice {
-    constructor(id, choice, questionID) {
-        this.id = id;
+    constructor(choice, questionID = null) {
+        this.id = null;
         this.choice = choice;
         this.questionID = questionID;
     }

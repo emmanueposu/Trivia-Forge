@@ -1,20 +1,18 @@
 export class Game {
-    constructor(id, userID, date, name, questions) {
-        this.id = id;
-        this.date = date;
+    constructor(name, date, userID = null) {
+        this.id = null;
         this.name = name;
-        this.questions = [];
+        this.categories = [];
         this.userID = userID;
     }
 
-    addGame(question) {
-        this.questions.push(question);
+    addCategory(category) {
+        this.categories.push(category);
     }
 
     toJsonObject() {
         return {
             id: this.id,
-            date: this.date,
             name: this.name,
             userID: this.userID
         }
