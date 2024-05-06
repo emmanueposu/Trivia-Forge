@@ -24,7 +24,8 @@ function Questions({ data }) {
                     <textarea className="form-control" defaultValue={data.hint}></textarea>
                 </div>
             </Card>
-        </div>
+
+        </div >
     )
 }
 export default Questions;
