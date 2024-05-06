@@ -1,9 +1,13 @@
 export class Category {
-    constructor(id, name, gameID) {
-        this.id = id;
+    constructor(name, gameID = null) {
+        this.id = null;
         this.name = name;
         this.gameID = gameID
         this.questions = [];
+    }
+
+    addQuestion(question) {
+        this.questions.push(question);
     }
 
     toJsonObject() {
