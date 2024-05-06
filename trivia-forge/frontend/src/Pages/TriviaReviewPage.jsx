@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom'; // used to access passed state
 import Questions from '../Components/Questions';
+import { Button } from 'react-bootstrap';
 
 function TriviaReviewPage() {
 	// Reference: https://reactrouter.com/en/main/hooks/use-location
@@ -17,6 +18,8 @@ function TriviaReviewPage() {
 				<Questions key={index} data={q} />
 
 			))}
+			<Button variant="primary" size="lg" block>
+				Save Changes</Button>
 		</div>
 	);
 }

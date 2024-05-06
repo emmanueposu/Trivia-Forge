@@ -53,7 +53,9 @@ function TriviaGenPage() {
 
             //parse response from API
             let sections = completion.choices[0].message.content.split('\n'); // store trivia questions
-
+            for (let i = 0; i < sections.length; i++) {
+                if (sections[i] === '') { sections.splice(i, 1); }
+            }
             //loop through sections and create question and choice objects
             for (let i = 0; i < sections.length; i += 7) {
                 let question = sections[i];
