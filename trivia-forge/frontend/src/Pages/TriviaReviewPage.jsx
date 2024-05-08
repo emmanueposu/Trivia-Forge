@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom'; // used to access passed state
-import Questions from '../Components/Questions';
+import Categories from '../Components/Categories';
 import { Button } from 'react-bootstrap';
 
 function TriviaReviewPage() {
@@ -8,14 +8,13 @@ function TriviaReviewPage() {
 	// pulls object from state property in TriviaGenPage
 	const location = useLocation();
 	const { game } = location.state;
-	let category = game.categories[0];
-	let questions = category.questions;
+	let categories = game.categories;
 	return (
 		<div>
 			<h1>Review and Edit Trivia Questions</h1>
 
-			{questions.map((q, index) => (
-				<Questions key={index} data={q} />
+			{categories.map((cat, index) => (
+				<Categories key={index} category={cat} />
 
 			))}
 			<Button variant="primary" size="lg" block>

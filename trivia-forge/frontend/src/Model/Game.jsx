@@ -1,7 +1,8 @@
 export class Game {
-    constructor(name, date, userID = null) {
+    constructor(name, theme, userID = null) {
         this.id = null;
         this.name = name;
+        this.theme = theme;
         this.categories = [];
         this.userID = userID;
     }
@@ -12,8 +13,8 @@ export class Game {
 
     toJsonObject() {
         return {
-            id: this.id,
             name: this.name,
+            theme: this.theme,
             userID: this.userID
         }
     }
