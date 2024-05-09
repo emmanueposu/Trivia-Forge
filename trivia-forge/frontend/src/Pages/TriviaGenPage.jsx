@@ -22,7 +22,7 @@ function TriviaGenPage() {
     const [Title, setTitle] = useState('');
     const [Theme, setTheme] = useState('');
     const [categories, setCategories] = useState([]);
-    const [isMultipleChoice, setIsMultipleChoice] = useState(true);
+    const [isMultipleChoice, setIsMultipleChoice] = useState(false);
     const navigate = useNavigate();
 
     const handleAddCategory = () => {
@@ -193,7 +193,7 @@ function TriviaGenPage() {
                         <input
                             type="checkbox"
                             checked={isMultipleChoice}
-                            onChange={e => setIsMultipleChoice(e.target.value)}
+                            onChange={e => setIsMultipleChoice(!isMultipleChoice)}
                             //className="form-control" 
                             id="multipleChoice"
                         />
