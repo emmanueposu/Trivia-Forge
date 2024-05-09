@@ -1,6 +1,6 @@
-export default class Choice {
-    constructor(id, choice, questionID) {
-        this.id = id;
+export class Choice {
+    constructor(choice, questionID = null) {
+        this.id = null;
         this.choice = choice;
         this.questionID = questionID;
     }

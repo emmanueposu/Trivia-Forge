@@ -1,8 +1,9 @@
-export default class Question {
-    constructor(id, question, answer, categoryID) {
-        this.id = id;
+export class Question {
+    constructor(question, answer, hint, categoryID = null) {
+        this.id = null;
         this.question = question;
         this.answer = answer;
+        this.hint = hint;
         this.categoryID = categoryID;
         this.choices = [];
     }

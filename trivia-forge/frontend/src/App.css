@@ -104,9 +104,21 @@
   background-color: white;
 }
 
+h2 {
+  text-align: center;
+}
+
+.CardPadding {
+  margin: 20px;
+  padding: 10px;
+  background-color: bisque;
+}
+
 footer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
+  background-color: #282c34;
+  color: white;
   text-align: center;
   width: 100%;
 }
