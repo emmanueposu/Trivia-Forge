@@ -1,4 +1,4 @@
-export class Choice {
+export default class Choice {
     constructor(id, choice, questionID) {
         this.id = id;
         this.choice = choice;

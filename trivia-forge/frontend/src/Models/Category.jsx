@@ -1,4 +1,4 @@
-export class Category {
+export default class Category {
     constructor(id, name, gameID) {
         this.id = id;
         this.name = name;

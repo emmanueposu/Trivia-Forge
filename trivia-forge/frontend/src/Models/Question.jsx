@@ -1,4 +1,4 @@
-export class Question {
+export default class Question {
     constructor(id, question, answer, categoryID) {
         this.id = id;
         this.question = question;

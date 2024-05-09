@@ -1,4 +1,4 @@
-export class User {
+export default class User {
     constructor(id, date, email, password, profilePic) {
         this.id = id;
         this.date = date;

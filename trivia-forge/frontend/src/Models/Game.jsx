@@ -1,4 +1,4 @@
-export class Game {
+export default class Game {
     constructor(id, userID, date, name, questions) {
         this.id = id;
         this.date = date;

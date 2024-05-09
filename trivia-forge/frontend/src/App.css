@@ -145,3 +145,9 @@ footer {
   border: 3px solid #ee7600;
   outline: none;
 }
+
+.card:hover {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  /* border: solid;
+  border-color: darkgrey; */
+}

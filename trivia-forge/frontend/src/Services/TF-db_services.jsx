@@ -3,7 +3,7 @@ import User from '../Models/User';
 import Game from '../Models/Game';
 import Question from '../Models/Question';
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = 'http://localhost:5000';
 
 /* ************************************ User ************************************ */
 
@@ -52,9 +52,19 @@ export const updateUser = async (user) => {
 
 /* ************************************ Game ************************************ */
 
-export const getGame = async () => {
+export const getGames = async () => {
     try {
         const response = await axios.get(`${API_URL}/games`);
+        return response.data;
+    } catch (error) {
+        console.error('Failed to fetch games');
+        return [];
+    }
+}
+
+export const getGame = async (game) => {
+    try {
+        const response = await axios.get(`${API_URL}/games/${game.id}`);
         const { id, date, name, userID, questions } = response.data;
         return new Game(id, date, name, userID, questions);
     } catch (error) {
@@ -96,11 +106,16 @@ export const updateGame = async (game) => {
 /* ************************************************************************************ */
 
 /* ************************************ Questions ************************************** */
-export const getQuestions = async () => {
+export const getQuestions = async (category_ids) => {
     try {
         const response = await axios.get(`${API_URL}/questions`);
-        const { id, question, answer, categoryID } = response.data;
-        return new Question(id, question, answer, categoryID);
+        let questions = []
+        for (let i = 0; i < response.data.length; i++) {
+            if (category_ids.has(response.data[i].category_id)) {
+                questions.push(response.data[i]);
+            };
+        };
+        return questions;
     } catch (error) {
         console.error('Failed to fetch questions');
         return [];
@@ -108,9 +123,21 @@ export const getQuestions = async () => {
 
 };
 
+export const getQuestion = async (question) => {
+    try {
+        const response = await axios.get(`${API_URL}/questions${question.id}`);
+        const { id, question, answer, categoryID } = response.data;
+        return new Question(id, question, answer, categoryID);
+    } catch (error) {
+        console.error('Failed to fetch question');
+        return [];
+    }
+
+};
+
 export const addQuestion = async (question) => {
     try {
-        const response = await axios.post(`${API_URL}/questions`, question.toJsonObject());
+        const response = await axios.post(`${API_URL}/questions/${question.id}`, question.toJsonObject());
         return response.data;
     } catch (error) {
         console.error('Failed to add question');
@@ -140,12 +167,29 @@ export const updateQuestion = async (question) => {
 /* ************************************************************************************ */
 
 /* ************************************ Categories ************************************ */
-export const getCategories = async () => {
+export const getCategories = async (game) => {
     try {
         const response = await axios.get(`${API_URL}/categories`);
-        return response.data;
+        let categories = []
+        for (let i = 0; i < response.data.length; i++) {
+            if (response.data[i].game_id == game.id) {
+                categories.push(response.data[i]);
+            }
+        }
+        return categories;
     } catch (error) {
         console.error('Failed to fetch categories');
+        return [];
+    }
+};
+
+
+export const getCategory = async (category) => {
+    try {
+        const response = await axios.get(`${API_URL}/category/${category.id}`);
+        return response.data;
+    } catch (error) {
+        console.error('Failed to fetch category');
         return [];
     }
 };
@@ -184,9 +228,19 @@ export const updateCategory = async (category) => {
 
 /* ************************************ Choice ************************************ */
 
-export const getChoice = async () => {
+export const getChoices = async () => {
     try {
         const response = await axios.get(`${API_URL}/choices`);
+        return response.data;
+    } catch (error) {
+        console.error('Failed to fetch choices');
+        return [];
+    }
+}
+
+export const getChoice = async (choice) => {
+    try {
+        const response = await axios.get(`${API_URL}/choices/${choice.id}`);
         return response.data;
     } catch (error) {
         console.error('Failed to fetch choice');
