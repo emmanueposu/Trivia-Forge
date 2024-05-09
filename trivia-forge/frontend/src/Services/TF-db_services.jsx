@@ -1,7 +1,7 @@
 import axios from 'axios';
-import User from '../Models/User';
-import Game from '../Models/Game';
-import Question from '../Models/Question';
+import {User} from '../Models/User';
+import {Game} from '../Models/Game';
+import {Question} from '../Models/Question';
 
 const API_URL = 'http://localhost:5000';
 

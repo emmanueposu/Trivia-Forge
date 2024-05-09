@@ -2,7 +2,7 @@ import React from "react";
 import Choices from "../Components/Choices";
 import { Card } from "react-bootstrap";
 
-import { Question } from "../Model/Question";
+import { Question } from "../Models/Question";
 
 function Questions({ data }) {
     let choices = data.choices;
