@@ -111,7 +111,7 @@ h2 {
 .CardPadding {
   margin: 20px;
   padding: 10px;
-  background-color: bisque;
+  background-color: #b3d9ff !important;
 }
 
 footer {
@@ -142,7 +142,6 @@ footer {
   font-family: 'Fredoka One', cursive;
   font-size: 40px;
   border-radius: 70px;
-  /* Rounded corners */
   box-shadow: 0 8px #999;
   /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.1); */
   width: 40%;
@@ -156,4 +155,86 @@ footer {
   background: linear-gradient(to bottom, #ff6700, #ff8c00);
   border: 3px solid #ee7600;
   outline: none;
+}
+
+
+.trivia-review-container {
+  margin: 30px auto;
+  padding: 30px;
+  width: 900px; 
+  max-width: 100%;
+  background-color: #80bfff; 
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  overflow-y: auto;
+  max-height: 80vh;
+}
+
+.trivia-review-heading {
+  color: #F8F8FF;  
+  padding: 15px;
+  font-size: 40px; 
+  font-weight: bold; 
+  text-shadow: 
+    -1px -1px 0 #000, 
+    1px -1px 0 #000, 
+    -1px 1px 0 #000, 
+    1px 1px 0 #000;
+}
+
+
+.trivia-review-button {
+  font-family: 'Fredoka One', cursive !important;
+  width: 400px; 
+  margin: 10px !important;
+  font-size: 20px !important;
+  padding: 10px 0; 
+  background: linear-gradient(to bottom, #ff8c00, #ff6700); 
+  color: white; 
+  border: none !important; 
+  border-radius: 70px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 0 0 3px rgba(255, 103, 0, 0.5);
+}
+
+
+.trivia-review-button:hover,
+.trivia-review-button:focus {
+  transform: translateY(-2px); 
+  background: linear-gradient(to bottom, #ff6700, #ff8c00);
+  border: 3px solid #ee7600;
+  outline: none;
+}
+
+.category-container {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #99ccff; 
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.input-field {
+  width: 90%; 
+  padding: 8px;
+  margin: 10px 0;
+  border: 1px solid #3498db;
+  border-radius: 4px;
+}
+
+.input-label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.trivia-button-container {
+  margin: 10px;
+  flex: 0 0 auto;
+  text-align: center;
 }
