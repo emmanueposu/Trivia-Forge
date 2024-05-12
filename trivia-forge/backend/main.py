@@ -1,8 +1,10 @@
 from flask import Flask, request, jsonify
 from endpoints import home, user, game, category, question, choice
+from flask_cors import CORS
 
 
 app = Flask(__name__)
+CORS(app)
 app.register_blueprint(home.bp)
 app.register_blueprint(user.bp)
 app.register_blueprint(game.bp)

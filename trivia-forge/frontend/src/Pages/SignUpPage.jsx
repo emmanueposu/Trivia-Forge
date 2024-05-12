@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Form, Button, Card } from "react-bootstrap";
 import { addUser } from '../Services/TF-db_services';
+import { User } from '../Models/User';
 
 function SignUpPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [username, setUsername] = useState('');
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
@@ -15,10 +17,8 @@ function SignUpPage() {
             alert('Passwords do not match');
             return;
         }
-        const user = {
-            email: email,
-            password: password
-        };
+        const user = new User(null, email, password, username); 
+        console.log('Sending user data:', user.toJsonObject());
         const addedUser = await addUser(user);
         if (addedUser) {
             alert('User added:', addedUser);
@@ -38,6 +38,11 @@ function SignUpPage() {
                         <Form.Text className="text-muted">
                             We'll never share your email with anyone else.
                         </Form.Text>
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="formBasicUsername">
+                        <Form.Label>Username</Form.Label>
+                        <Form.Control type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicPassword">

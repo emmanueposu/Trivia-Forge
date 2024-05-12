@@ -1,10 +1,10 @@
 import React, { useState } from "react"; // variables that cause the component to re-render when they change
 import OpenAI from "openai";
-import { Game } from "../Model/Game";
+import { Game } from "../Models/Game";
 import { useNavigate } from "react-router-dom";
-import { Question } from "../Model/Question";
-import { Choice } from "../Model/Choice";
-import { Category } from "../Model/Category";
+import { Question } from "../Models/Question";
+import { Choice } from "../Models/Choice";
+import { Category } from "../Models/Category";
 import { Card } from "react-bootstrap";
 
 
