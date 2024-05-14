@@ -21,7 +21,7 @@ function Home() {
             </Row>
             <Row>
                 <Col>
-                    <Button variant="primary"> <FaRegFolderOpen /> My Trivia Games </Button>
+                    <Button variant="primary" onClick={() => navigate('/myTrivia')}> <FaRegFolderOpen /> My Trivia Games </Button>
                 </Col>
             </Row>
             <Row>
@@ -36,7 +36,7 @@ function Home() {
             </Row>
             <Row>
                 <Col>
-                    <Button variant="primary"> <FaUserPlus /> Sign Up </Button>
+                    <Button variant="primary" onClick={() => navigate('/signUp')}> <FaUserPlus /> Sign Up </Button>
                 </Col>
             </Row>
         </Container>

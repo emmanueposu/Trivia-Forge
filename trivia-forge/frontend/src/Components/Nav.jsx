@@ -18,7 +18,7 @@ function Navigation() {
                     <Nav.Link href="/triviaGen">Create New Trivia</Nav.Link>
                     <Nav.Link href="/myTrivia">My Trivia</Nav.Link>
                 </Nav>
-                <Nav>
+                <Nav style={{marginRight: ".5rem"}}>
                     <Button onClick={handleShow}>
                         <i className="bi bi-person-circle" style={{marginRight: ".5rem"}}></i>Log In
                     </Button>
@@ -44,7 +44,7 @@ function Navigation() {
                             id="inputPassword"
                         />
                     </Form>
-                    <p>Not a member? <Link onClick={handleClose} to="/SignUpPage">Sign Up</Link></p>
+                    <p>Not a member? <Link onClick={handleClose} to="/signUp">Sign Up</Link></p>
                 </Modal.Body>
 
                 <Modal.Footer>

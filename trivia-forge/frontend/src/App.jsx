@@ -28,7 +28,7 @@ function App() {
             <Route path="/triviaGen" element={<TriviaGenPage />} />
             <Route path="/review" element={<TriviaReviewPage />} />
             <Route path="/myTrivia" element={<MyTrivia />} />
-            <Route path="/SignUpPage" element={<SignUpPage />} />
+            <Route path="/signUp" element={<SignUpPage />} />
           </Routes>
 
         </main>

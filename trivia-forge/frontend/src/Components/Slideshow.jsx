@@ -3,7 +3,6 @@ import Carousel from 'react-bootstrap/Carousel';
 import { getCategories, getQuestions ,getChoices } from "../Services/TF-db_services";
 import Spinner from 'react-bootstrap/Spinner';
 import Button from "react-bootstrap/esm/Button";
-const slideshowBackground = "https://yxdrsdfocuonvorowgaa.supabase.co/storage/v1/object/sign/UI%20Assets/white-solid-color-background?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJVSSBBc3NldHMvd2hpdGUtc29saWQtY29sb3ItYmFja2dyb3VuZCIsImlhdCI6MTcxNTE3MDQ0NywiZXhwIjo0ODY4NzcwNDQ3fQ.dPaQP-yvK0-k6wBJWrI6FqrXGEqv6Vv-a8Th99zGSyA&t=2024-05-08T12%3A14%3A08.001Z"
 
 
 function Slideshow(game) {
