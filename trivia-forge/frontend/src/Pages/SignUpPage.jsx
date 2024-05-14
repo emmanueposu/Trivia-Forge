@@ -30,6 +30,7 @@ function SignUpPage() {
 
     return (
         <>
+            <title>Sign Up</title>
             <Card style={{ width: '35rem', margin: '0 auto', float: 'none' }}>
                 <Form onSubmit={handleSubmit} className="form-group">
                     <Form.Group className="mb-3" controlId="formBasicEmail">

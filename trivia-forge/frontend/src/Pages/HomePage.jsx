@@ -9,10 +9,11 @@ function Home() {
 
     return (
         <Container className="homepage-container">
+            <title>Home</title>
             <Row>
                 <Col>
-                    <svg class="header-animation">
-                        <text x="50%" y="50%" dy=".35em" text-anchor="middle">
+                    <svg className="header-animation">
+                        <text x="50%" y="50%" dy=".35em" textAnchor="middle">
 			                Trivia Forge
 		                </text>
                     </svg>
