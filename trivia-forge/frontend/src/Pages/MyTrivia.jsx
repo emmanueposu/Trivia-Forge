@@ -8,7 +8,6 @@ import GameCategories from "../Components/GameCategories";
 import GameQuestions from "../Components/GameQuestions";
 import Slideshow from "../Components/Slideshow";
 import Modal from 'react-bootstrap/Modal';
-// import BootstrapTable from '../Components/BootstrapTable';
 
 function MyTrivia() {
     const [games, setGames] = useState(null);
@@ -36,7 +35,6 @@ function MyTrivia() {
         setCurrentGame(game);
     }
 
-
     return (
         <>  
             {games &&(
@@ -44,7 +42,7 @@ function MyTrivia() {
                     <Row xs={2} md={4} className="g-4 m-4">
                         {games.map((game, index) => (
                             <Col key={index}>
-                                <Card>
+                                <Card className="" style={{backgroundColor: "#f5f3f4"}}>
                                     <Card.Header as="h4">{game.title}</Card.Header>
                                     <Card.Body>
                                         <Card.Title as="h6">Category:</Card.Title>
@@ -56,7 +54,8 @@ function MyTrivia() {
                                             <GameQuestions data={game}/>
                                         </Card.Text>
                                         <div className="text-center">
-                                            <Button variant="success" onClick={() => handleShow(game)}>Play Game</Button>
+                                            <Button onClick={() => handleShow(game)} variant="success" className="mx-2">Play</Button>
+                                            <Button onClick={() => navigation.navigate('/review', { state: { game }, state: { page: 'edit' }})} variant="secondary" className="mx-2">Edit</Button>
                                         </div>
                                     </Card.Body>
                                 </Card>    
@@ -68,29 +67,14 @@ function MyTrivia() {
                 )
             )}
             <Modal show={show} onHide={handleClose} fullscreen={true}>
-                <Modal.Header closeButton>
+                <Modal.Header data-bs-theme="dark" closeButton style={{backgroundColor: "#240046", border: "none"}}>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body style={{backgroundColor: "#240046" }}>
                     <Slideshow data={currentGame}/>
                 </Modal.Body>
-                <Modal.Footer>
-                </Modal.Footer>
             </Modal>
         </>
     );
 
 }
 export default MyTrivia;
-// function MyTrivia() {
-//     return (
-//         <>
-//             <p>
-//                 My Trivia Page test
-
-//             </p>
-//             <BootstrapTable />
-//         </>
-//     );
-
-// }
-// export default MyTrivia;
