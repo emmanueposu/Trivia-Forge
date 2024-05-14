@@ -76,12 +76,12 @@ function TriviaGenPage() {
         }
         //create a new game and category object and add category to game
         let game = new Game(Title, Theme);
-
+        
         for (let i = 0; i < categories.length; i++) {
             let newCategory = new Category(categories[i].name);
             console.log(newCategory.name);
             game.addCategory(newCategory);
-
+              
             //parse response from API
             let sections = responses[i]; // store trivia questions
             for (let i = 0; i < sections.length; i++) {

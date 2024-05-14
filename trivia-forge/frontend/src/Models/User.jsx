@@ -1,10 +1,11 @@
 import datetime from 'node-datetime';
 export class User {
-    constructor(date, email, password, profilePic = null) {
-        this.id = null;
+    constructor(date, email, password, username, profilePic = null) {
+        // this.id = null;
+        this.username = username;
         this.email = email;
         this.password = password;
-        this.profilePic = profilePic;
+        // this.profilePic = null;
         this.games = [];
     }
 
@@ -13,10 +14,11 @@ export class User {
     }
     toJsonObject() {
         return {
-            id: this.id,
+            // id: this.id,
+            username: this.username,
             email: this.email,
             password: this.password,
-            profilePic: this.profilePic
+            // profilePic: this.profilePic
         }
     }
 }
