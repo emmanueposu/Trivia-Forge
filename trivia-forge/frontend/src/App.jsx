@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Pages/HomePage";
@@ -30,7 +28,7 @@ function App() {
             <Route path="/triviaGen" element={<TriviaGenPage />} />
             <Route path="/review" element={<TriviaReviewPage />} />
             <Route path="/myTrivia" element={<MyTrivia />} />
-            <Route path="/SignUpPage" element={<SignUpPage />} />
+            <Route path="/signUp" element={<SignUpPage />} />
           </Routes>
 
         </main>

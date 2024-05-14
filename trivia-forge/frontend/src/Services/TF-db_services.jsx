@@ -229,10 +229,13 @@ export const updateCategory = async (category) => {
 
 /* ************************************ Choice ************************************ */
 
-export const getChoices = async () => {
+export const getChoices = async (questions) => {
     try {
         const response = await axios.get(`${API_URL}/choices`);
-        return response.data;
+        for (let i = 0; i < response.data.length; i++) {
+            questions[response.data[i].question_id]['choices'].push(response.data[i].text);
+        }
+        return questions;
     } catch (error) {
         console.error('Failed to fetch choices');
         return [];

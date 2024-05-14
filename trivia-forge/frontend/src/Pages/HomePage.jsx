@@ -9,10 +9,11 @@ function Home() {
 
     return (
         <Container className="homepage-container">
+            <title>Home</title>
             <Row>
                 <Col>
-                    <svg class="header-animation">
-                        <text x="50%" y="50%" dy=".35em" text-anchor="middle">
+                    <svg className="header-animation">
+                        <text x="50%" y="50%" dy=".35em" textAnchor="middle">
 			                Trivia Forge
 		                </text>
                     </svg>
@@ -20,7 +21,7 @@ function Home() {
             </Row>
             <Row>
                 <Col>
-                    <Button variant="primary"> <FaRegFolderOpen /> My Trivia Games </Button>
+                    <Button variant="primary" onClick={() => navigate('/myTrivia')}> <FaRegFolderOpen /> My Trivia Games </Button>
                 </Col>
             </Row>
             <Row>
@@ -35,7 +36,7 @@ function Home() {
             </Row>
             <Row>
                 <Col>
-                    <Button variant="primary"> <FaUserPlus /> Sign Up </Button>
+                    <Button variant="primary" onClick={() => navigate('/signUp')}> <FaUserPlus /> Sign Up </Button>
                 </Col>
             </Row>
         </Container>
