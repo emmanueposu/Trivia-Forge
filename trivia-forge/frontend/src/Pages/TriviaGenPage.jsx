@@ -77,12 +77,12 @@ function TriviaGenPage() {
         //create a new game and category object and add category to game
         //need to change third parameter to current User ID once Users can sign in.
         let game = new Game(Title, Theme, 1);
-
+        
         for (let i = 0; i < categories.length; i++) {
             let newCategory = new Category(categories[i].name);
             console.log(newCategory.name);
             game.addCategory(newCategory);
-
+              
             //parse response from API
             let sections = responses[i]; // store trivia questions
             for (let i = 0; i < sections.length; i++) {
@@ -124,6 +124,7 @@ function TriviaGenPage() {
     // render component as a form
     return (
         <div>
+            <title>Create New Trivia</title>
             <h1>
                 Trivia Generator
             </h1>

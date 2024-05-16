@@ -5,6 +5,7 @@ import { Question } from '../Models/Question';
 import { Category } from '../Models/Category';
 import { Choice } from '../Models/Choice';
 
+
 const API_URL = 'http://127.0.0.1:5000';
 
 /* ************************************ User ************************************ */
@@ -12,8 +13,8 @@ const API_URL = 'http://127.0.0.1:5000';
 export const getUser = async () => {
     try {
         const response = await axios.get(`${API_URL}/users`);
-        const { id, date, email, password, profilePic } = response.data;
-        return new User(id, date, email, password, profilePic);
+        const { id, username, date, email, password, profilePic } = response.data;
+        return new User(id, username, date, email, password, profilePic);
     } catch (error) {
         console.error('Failed to fetch user');
         return [];
@@ -235,10 +236,13 @@ export const updateCategory = async (category) => {
 
 /* ************************************ Choice ************************************ */
 
-export const getChoices = async () => {
+export const getChoices = async (questions) => {
     try {
         const response = await axios.get(`${API_URL}/choices`);
-        return response.data;
+        for (let i = 0; i < response.data.length; i++) {
+            questions[response.data[i].question_id]['choices'].push(response.data[i].text);
+        }
+        return questions;
     } catch (error) {
         console.error('Failed to fetch choices');
         return [];
