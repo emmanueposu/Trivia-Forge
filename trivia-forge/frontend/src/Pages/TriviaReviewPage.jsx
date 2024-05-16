@@ -2,15 +2,28 @@ import React from 'react';
 import { useLocation } from 'react-router-dom'; // used to access passed state
 import Categories from '../Components/Categories';
 import { Button } from 'react-bootstrap';
+import { AddAllForGame, UpdateAllForGame } from '../Services/Services';
+import { useNavigate } from "react-router-dom";
 import '../App.css';
 
 function TriviaReviewPage() {
 	// Reference: https://reactrouter.com/en/main/hooks/use-location
 	// pulls object from state property in TriviaGenPage
 	const location = useLocation();
-	const { game } = location.state;
+	const { game, page } = location.state;
 	let categories = game.categories;
-	
+	const navigate = useNavigate();
+
+	const HandleSaveGame = () => {
+		UpdateAllForGame(game);
+		navigate('/myTrivia');
+	};
+
+	const HandleCreateGame = () => {
+		AddAllForGame(game);
+		navigate('/myTrivia');
+	};
+
 	return (
 		<div>
 			<title>Trivia Review</title>
@@ -24,10 +37,16 @@ function TriviaReviewPage() {
 					</div>
 				))}
 			</div>
-			<div block className="trivia-button-container">
-				<Button variant="primary" className="trivia-review-button">
-					Save Changes
-				</Button>
+			<div className="trivia-button-container">
+				{page === 'edit' ? (
+					<Button variant="primary" onClick={HandleSaveGame} className="trivia-review-button">
+						Save Changes
+					</Button>
+				) : (
+					<Button variant="primary" onClick={HandleCreateGame} className="trivia-review-button">
+						Save New Game
+					</Button>
+				)}
 			</div>
 		</div>
 	);

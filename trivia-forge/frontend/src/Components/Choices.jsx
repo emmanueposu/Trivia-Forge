@@ -7,7 +7,7 @@ function Choices({ choices }) {
             {choices.map((choice, index) => {
                 return (
                     <div className="card-body" key={index}>
-                        <textarea className="form-control" defaultValue={choice.choice}></textarea>
+                        <textarea className="form-control" defaultValue={choice.text}></textarea>
                     </div>
                 );
             })}

@@ -75,7 +75,8 @@ function TriviaGenPage() {
             }
         }
         //create a new game and category object and add category to game
-        let game = new Game(Title, Theme);
+        //need to change third parameter to current User ID once Users can sign in.
+        let game = new Game(Title, Theme, 1);
         
         for (let i = 0; i < categories.length; i++) {
             let newCategory = new Category(categories[i].name);
@@ -100,7 +101,7 @@ function TriviaGenPage() {
                 let hint = sections[i + 6];
 
                 //create question object and add it to category
-                let newQuestion = new Question(question, answer, hint);
+                let newQuestion = new Question(question, answer, hint, isMultipleChoice);
                 newCategory.addQuestion(newQuestion);
 
                 //add choices to question object
@@ -109,10 +110,12 @@ function TriviaGenPage() {
                 }
             }
 
-
+            console.log("Category Questions:", newCategory.questions);
         }
+        console.log("Game Categories", game.categories);
+
         // state property to pass data as object to new route
-        navigate('/review', { state: { game } });
+        navigate('/review', { state: { game, page: 'review' } });
         //console.log(completion.choices[0].message);
 
 

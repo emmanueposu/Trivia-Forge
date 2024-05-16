@@ -12,9 +12,8 @@ export class Category {
 
     toJsonObject() {
         return {
-            id: this.id,
-            name: this.name,
-            gameID: this.gameID
+            title: this.name,
+            game_id: this.gameID
         }
     }
 }
