@@ -26,6 +26,7 @@ function TriviaReviewPage() {
 
 	return (
 		<div>
+			<title>Trivia Review</title>
 			<div className="trivia-review-container">
 				<h1 className="trivia-review-heading">Review and Edit Trivia Questions</h1>
 				{categories.map((cat, index) => (

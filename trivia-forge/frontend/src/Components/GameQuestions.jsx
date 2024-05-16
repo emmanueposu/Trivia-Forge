@@ -14,12 +14,12 @@ function GameQuestions(game) {
 
     useEffect(() => {
         if (categories) {
-            const data = new Set();
+            const category_ids = new Set();
             for (let i = 0; i < categories.length; i++) {
-                data.add(categories[i].id)
+                category_ids.add(categories[i].id)
             };
 
-            getQuestions(data).then( res => {
+            getQuestions(category_ids).then( res => {
                 setQuestions(res);
             });
         }

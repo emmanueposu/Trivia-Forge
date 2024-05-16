@@ -124,6 +124,7 @@ function TriviaGenPage() {
     // render component as a form
     return (
         <div>
+            <title>Create New Trivia</title>
             <h1>
                 Trivia Generator
             </h1>
