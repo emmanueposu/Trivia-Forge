@@ -1,15 +1,14 @@
 export class Choice {
-    constructor(choice, questionID = null) {
+    constructor(text, questionID = null) {
         this.id = null;
-        this.choice = choice;
+        this.text = text;
         this.questionID = questionID;
     }
 
     toJsonObject() {
         return {
-            id: this.id,
-            choice: this.choice,
-            questionID: this.questionID
+            text: this.text,
+            question_id: this.questionID
         }
     }
 }   

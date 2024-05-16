@@ -1,9 +1,10 @@
 export class Question {
-    constructor(question, answer, hint, categoryID = null) {
+    constructor(question, answer, hint, multipleChoice, categoryID = null) {
         this.id = null;
         this.question = question;
         this.answer = answer;
         this.hint = hint;
+        this.multipleChoice = multipleChoice;
         this.categoryID = categoryID;
         this.choices = [];
     }
@@ -11,13 +12,17 @@ export class Question {
     addChoice(choice) {
         this.choices.push(choice);
     }
+    setCategoryID(categoryID) {
+        this.category = categoryID;
+    }
 
     toJsonObject() {
         return {
-            id: this.id,
-            question: this.question,
+            problem: this.question,
             answer: this.answer,
-            categoryID: this.category
+            hint: this.hint,
+            multiple_choice: this.multipleChoice,
+            category_id: this.categoryID
         }
     }
 }

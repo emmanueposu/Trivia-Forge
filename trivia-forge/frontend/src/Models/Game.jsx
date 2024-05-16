@@ -13,9 +13,10 @@ export class Game {
 
     toJsonObject() {
         return {
-            name: this.name,
-            theme: this.theme,
-            userID: this.userID
+            title: this.name,
+            user_id: this.userID,
+            Theme: this.theme
+
         }
     }
 }

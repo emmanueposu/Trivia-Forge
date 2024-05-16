@@ -1,9 +1,11 @@
 import axios from 'axios';
-import {User} from '../Models/User';
-import {Game} from '../Models/Game';
-import {Question} from '../Models/Question';
+import { User } from '../Models/User';
+import { Game } from '../Models/Game';
+import { Question } from '../Models/Question';
+import { Category } from '../Models/Category';
+import { Choice } from '../Models/Choice';
 
-const API_URL = 'http://localhost:5000';
+const API_URL = 'http://127.0.0.1:5000';
 
 /* ************************************ User ************************************ */
 
@@ -74,8 +76,9 @@ export const getGame = async (game) => {
 }
 
 export const addGame = async (game) => {
+    let newGame = new Game(game.name, game.theme, game.userID);
     try {
-        const response = await axios.post(`${API_URL}/games`, game.toJsonObject());
+        const response = await axios.post(`${API_URL}/games`, newGame.toJsonObject());
         return response.data;
     } catch (error) {
         console.error('Failed to add game');
@@ -125,7 +128,7 @@ export const getQuestions = async (category_ids) => {
 
 export const getQuestion = async (question) => {
     try {
-        const response = await axios.get(`${API_URL}/questions${question.id}`);
+        const response = await axios.get(`${API_URL}/questions/${question.id}`);
         const { id, question, answer, categoryID } = response.data;
         return new Question(id, question, answer, categoryID);
     } catch (error) {
@@ -136,8 +139,11 @@ export const getQuestion = async (question) => {
 };
 
 export const addQuestion = async (question) => {
+    console.log("questionCategoryID:", question.categoryID)
+    let newQuestion = new Question(question.question, question.answer, question.hint, question.multipleChoice, question.categoryID);
     try {
-        const response = await axios.post(`${API_URL}/questions/${question.id}`, question.toJsonObject());
+        const response = await axios.post(`${API_URL}/questions`, newQuestion.toJsonObject());
+        console.log("question:", newQuestion.toJsonObject())
         return response.data;
     } catch (error) {
         console.error('Failed to add question');
@@ -195,8 +201,9 @@ export const getCategory = async (category) => {
 };
 
 export const addCategory = async (category) => {
+    let newCategory = new Category(category.name, category.gameID);
     try {
-        const response = await axios.post(`${API_URL}/categories`, category.toJsonObject());
+        const response = await axios.post(`${API_URL}/categories`, newCategory.toJsonObject());
         return response.data;
     } catch (error) {
         console.error('Failed to add category');
@@ -249,8 +256,10 @@ export const getChoice = async (choice) => {
 }
 
 export const addChoice = async (choice) => {
+    let newChoice = new Choice(choice.text, choice.questionID);
+    console.log("newChoice:", newChoice.toJsonObject())
     try {
-        const response = await axios.post(`${API_URL}/choices`, choice.toJsonObject());
+        const response = await axios.post(`${API_URL}/choices`, newChoice.toJsonObject());
         return response.data;
     } catch (error) {
         console.error('Failed to add choice');
