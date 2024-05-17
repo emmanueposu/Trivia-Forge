@@ -5,6 +5,10 @@ import { Question } from '../Models/Question';
 import { Category } from '../Models/Category';
 import { Choice } from '../Models/Choice';
 
+<<<<<<<< < Temporary merge branch 1
+
+const API_URL = 'http://localhost:5000';
+=========
 const API_URL = 'http://127.0.0.1:5000';
 
 /* ************************************ User ************************************ */
