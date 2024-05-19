@@ -3,6 +3,13 @@ import Choices from "../Components/Choices";
 import { Card } from "react-bootstrap";
 
 import { Question } from "../Models/Question";
+//logic for button to generate new question
+//
+//
+//
+//
+
+
 
 function Questions({ data }) {
     let choices = data.choices;
@@ -10,6 +17,7 @@ function Questions({ data }) {
         <div>
             <Card className="CardPadding">
                 <h2 className="centered">Question</h2>
+                //Button to generate new question somewhere in here
                 <div className="card-body">
                     <textarea className="form-control" defaultValue={data.question}></textarea>
                 </div>

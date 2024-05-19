@@ -5,10 +5,6 @@ import { Question } from '../Models/Question';
 import { Category } from '../Models/Category';
 import { Choice } from '../Models/Choice';
 
-<<<<<<<< < Temporary merge branch 1
-
-const API_URL = 'http://localhost:5000';
-=========
 const API_URL = 'http://127.0.0.1:5000';
 
 /* ************************************ User ************************************ */
@@ -64,6 +60,16 @@ export const getGames = async () => {
         return response.data;
     } catch (error) {
         console.error('Failed to fetch games');
+        return [];
+    }
+}
+
+export const getGamesWithDetails = async () => {
+    try {
+        const response = await axios.get(`${API_URL}/games/games_with_details`);
+        return response.data;
+    } catch (error) {
+        console.error('Failed to fetch games with details');
         return [];
     }
 }
@@ -240,10 +246,14 @@ export const updateCategory = async (category) => {
 /* ************************************ Choice ************************************ */
 
 export const getChoices = async (questions) => {
+    console.log("questions:", questions)
     try {
         const response = await axios.get(`${API_URL}/choices`);
+        console.log("response.data:", response.data)
         for (let i = 0; i < response.data.length; i++) {
-            questions[response.data[i].question_id]['choices'].push(response.data[i].text);
+            if (questions[response.data[i].question_id] !== undefined) {
+                questions[response.data[i].question_id]['choices'].push(response.data[i].text);
+            }
         }
         return questions;
     } catch (error) {
