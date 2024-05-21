@@ -9,16 +9,17 @@ const API_URL = 'http://127.0.0.1:5000';
 
 /* ************************************ User ************************************ */
 
-export const getUser = async () => {
+export const getUser = async (email, password) => {
     try {
-        const response = await axios.get(`${API_URL}/users`);
-        const { id, username, date, email, password, profilePic } = response.data;
-        return new User(id, username, date, email, password, profilePic);
+        const response = await axios.post(`${API_URL}/users/login`, { email, password });
+        return response.data;
     } catch (error) {
-        console.error('Failed to fetch user');
-        return [];
+        console.error('Failed to fetch user', error);
+        return null;
     }
-}
+};
+
+
 
 export const addUser = async (user) => {
     try {
@@ -54,9 +55,9 @@ export const updateUser = async (user) => {
 
 /* ************************************ Game ************************************ */
 
-export const getGames = async () => {
+export const getGames = async (user_id) => {
     try {
-        const response = await axios.get(`${API_URL}/games`);
+        const response = await axios.get(`${API_URL}/games`, { params: { user_id } });
         return response.data;
     } catch (error) {
         console.error('Failed to fetch games');
@@ -64,9 +65,10 @@ export const getGames = async () => {
     }
 }
 
-export const getGamesWithDetails = async () => {
+export const getGamesWithDetails = async (user_id) => {
     try {
-        const response = await axios.get(`${API_URL}/games/games_with_details`);
+        const response = await axios.get(`${API_URL}/games/games_with_details`, {
+            params: { user_id }});
         return response.data;
     } catch (error) {
         console.error('Failed to fetch games with details');

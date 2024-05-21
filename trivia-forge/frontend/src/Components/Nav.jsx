@@ -2,13 +2,24 @@ import React from "react";
 import { Navbar } from "react-bootstrap";
 import { Nav, Button, Modal, Form } from "react-bootstrap";
 import { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useStore from './useStore';
 
 function Navigation() {
     const [show, setShow] = useState(false);
+    const currentUser = useStore(state => state.currentUser);
+    const logout = useStore(state => state.logout);
+    const navigate = useNavigate();
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const handleLogout = () => {
+        logout();
+        navigate('/');
+    }
+
+
     return (
         <>
             <Navbar bg="dark" data-bs-theme="dark">
@@ -19,9 +30,15 @@ function Navigation() {
                     <Nav.Link href="/myTrivia">My Trivia</Nav.Link>
                 </Nav>
                 <Nav style={{marginRight: ".5rem"}}>
-                    <Button onClick={handleShow}>
-                        <i className="bi bi-person-circle" style={{marginRight: ".5rem"}}></i>Log In
-                    </Button>
+                    {currentUser ? (
+                        <Button onClick={handleLogout}>
+                            <i className="bi bi-person-circle" style={{ marginRight: ".5rem" }}></i>Logout
+                        </Button>
+                    ) : (
+                        <Button onClick={handleShow}>
+                            <i className="bi bi-person-circle" style={{ marginRight: ".5rem" }}></i>Log In
+                        </Button>
+                    )}
                 </Nav>
 
             </Navbar>

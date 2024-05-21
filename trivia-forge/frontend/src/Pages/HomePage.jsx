@@ -31,7 +31,7 @@ function Home() {
             </Row>
             <Row>
                 <Col>
-                    <Button variant="primary"> <FaUserCircle /> Login </Button>
+                    <Button variant="primary" onClick={() => navigate('/login')}> <FaUserCircle /> Login </Button>
                 </Col>
             </Row>
             <Row>

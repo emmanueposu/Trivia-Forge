@@ -5,6 +5,7 @@ import { addUser } from '../Services/TF-db_services';
 import { User } from '../Models/User';
 
 function SignUpPage() {
+    // initialize variables as empty strings
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -17,8 +18,11 @@ function SignUpPage() {
             alert('Passwords do not match');
             return;
         }
+        // create new user object with form input values
         const user = new User(null, email, password, username); 
-        console.log('Sending user data:', user.toJsonObject());
+        // console.log('Sending user data:', user.toJsonObject());
+
+        // call addUser function to add new user to database
         const addedUser = await addUser(user);
         if (addedUser) {
             alert('User added:', addedUser);

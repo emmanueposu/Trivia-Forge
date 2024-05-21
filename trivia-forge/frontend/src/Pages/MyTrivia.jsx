@@ -9,26 +9,29 @@ import GameQuestions from "../Components/GameQuestions";
 import Slideshow from "../Components/Slideshow";
 import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from "react-router-dom";
+import useStore from '../Components/useStore';
 
 function MyTrivia() {
-    const [games, setGames] = useState(null);
-    const [show, setShow] = useState(false);
-    const [currentGame, setCurrentGame] = useState(null)
-    const [games_with_details, setGamesWithDetails] = useState(null);
+    // const [games, setGames] = useState(null); // store list of games
+    const [show, setShow] = useState(false); // visibility of modal
+    const [currentGame, setCurrentGame] = useState(null); // store current game
+    // const [gamesWithDetails, setGamesWithDetails] = useState([]); // store games from user
     const navigate = useNavigate();
+    // const location = useLocation();
+    const currentUser = useStore(state => state.currentUser);
+    const userGames = useStore(state => state.userGames);
+    const setUserGames = useStore(state => state.setUserGames);
 
-    useEffect(() => {
-        getGames().then(res => {
-            setGames(res);
-        });
-    }, []);
+    // const user = location.state?.user;
 
+    // fetch game with details when the user changes
     useEffect(() => {
-        getGamesWithDetails().then(res => {
-            setGamesWithDetails(res);
-        });
-    }, [games_with_details]);
-    console.log(games_with_details);
+        if (currentUser && userGames.length === 0) {
+            getGamesWithDetails(currentUser.id).then(res => {
+                setUserGames(res);
+            });
+        }
+    }, [currentUser, userGames, setUserGames]);
 
     useEffect(() => {
         if (currentGame) {
@@ -43,39 +46,41 @@ function MyTrivia() {
 
     function handleShow(game) {
         setCurrentGame(game);
+        setShow(true);
     }
+
 
     return (
         <>
             <title>My Trivia</title>
-            {games_with_details && (
-                games_with_details.length > 0 ? (
-                    <Row xs={2} md={4} className="g-4 m-4">
-                        {games_with_details.map((game, index) => (
-                            <Col key={index}>
-                                <Card className="" style={{ backgroundColor: "#f5f3f4" }}>
-                                    <Card.Header as="h4">{game.title}</Card.Header>
-                                    <Card.Body>
-                                        <Card.Title as="h6">Categories:</Card.Title>
-                                        <Card.Text>
-                                            <GameCategories data={game} />
-                                        </Card.Text>
-                                        <Card.Title as="h6">Questions:</Card.Title>
-                                        <Card.Text>
-                                            <GameQuestions data={game} />
-                                        </Card.Text>
-                                        <div className="text-center">
-                                            <Button onClick={() => handleShow(game)} variant="success" className="mx-2">Play</Button>
-                                            <Button onClick={() => navigate('/review', { state: { 'game': game, 'page': 'edit' } })} variant="secondary" className="mx-2">Edit</Button>
-                                        </div>
-                                    </Card.Body>
-                                </Card>
-                            </Col>
-                        ))}
-                    </Row>
-                ) : (
-                    <h1 className="text-center mt-5">No games to display.</h1>
-                )
+            {/* check if there are games ti display */}
+            {userGames.length > 0 ? (
+                <Row xs={2} md={4} className="g-4 m-4">
+                    {/* iterate over games */}
+                    {userGames.map((game, index) => (
+                        <Col key={index}>
+                            <Card className="" style={{ backgroundColor: "#f5f3f4" }}>
+                                <Card.Header as="h4">{game.title}</Card.Header>
+                                <Card.Body>
+                                    <Card.Title as="h6">Categories:</Card.Title>
+                                    <Card.Text>
+                                        <GameCategories data={game} />
+                                    </Card.Text>
+                                    <Card.Title as="h6">Questions:</Card.Title>
+                                    <Card.Text>
+                                        <GameQuestions data={game} />
+                                    </Card.Text>
+                                    <div className="text-center">
+                                        <Button onClick={() => handleShow(game)} variant="success" className="mx-2">Play</Button>
+                                        <Button onClick={() => navigate('/review', { state: { 'game': game, 'page': 'edit' } })} variant="secondary" className="mx-2">Edit</Button>
+                                    </div>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    ))}
+                </Row>
+            ) : (
+                <h1 className="text-center mt-5">No games to display.</h1>
             )}
             <Modal show={show} onHide={handleClose} fullscreen={true}>
                 <Modal.Header data-bs-theme="dark" closeButton style={{ backgroundColor: "#240046", border: "none" }}>
@@ -86,6 +91,5 @@ function MyTrivia() {
             </Modal>
         </>
     );
-
 }
 export default MyTrivia;
