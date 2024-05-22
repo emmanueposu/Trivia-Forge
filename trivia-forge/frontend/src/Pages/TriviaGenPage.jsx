@@ -6,6 +6,7 @@ import { Question } from "../Models/Question";
 import { Choice } from "../Models/Choice";
 import { Category } from "../Models/Category";
 import { Card } from "react-bootstrap";
+import useStore from '../Components/useStore'; // global state management
 
 
 // initialize openai client using configuration specified in vite environment variables 
@@ -24,6 +25,8 @@ function TriviaGenPage() {
     const [categories, setCategories] = useState([]);
     const [isMultipleChoice, setIsMultipleChoice] = useState(false);
     const navigate = useNavigate();
+    // custom hook for adding game to global state
+    const addGame = useStore(state => state.addGame);
 
     const handleAddCategory = () => {
         const newCategory = { name: '' };
@@ -114,6 +117,8 @@ function TriviaGenPage() {
         }
         console.log("Game Categories", game.categories);
 
+        // Save game to global state and local storage
+        addGame(game);
         // state property to pass data as object to new route
         navigate('/review', { state: { game, page: 'review' } });
         //console.log(completion.choices[0].message);

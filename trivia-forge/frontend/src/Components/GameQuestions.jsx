@@ -4,7 +4,7 @@ import { getCategories, getQuestions } from "../Services/TF-db_services";
 function GameQuestions(game) {
     //const [categories, setCategories] = useState(null);
     //const [questions, setQuestions] = useState(null);
-    let categories = game.data.categories;
+    let categories = game?.data.categories || [];
     function questionCount() {
         let count = 0;
         for (let i = 0; i < categories.length; i++) {
@@ -42,3 +42,4 @@ function GameQuestions(game) {
 }
 
 export default GameQuestions;
+

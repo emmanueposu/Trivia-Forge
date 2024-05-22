@@ -6,6 +6,7 @@ import Navigation from "./Components/Nav";
 import TriviaGenPage from './Pages/TriviaGenPage';
 import TriviaReviewPage from './Pages/TriviaReviewPage';
 import MyTrivia from './Pages/MyTrivia';
+import LoginPage from './Pages/LoginPage';
 import SignUpPage from './Pages/SignUpPage';
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -29,6 +30,7 @@ function App() {
             <Route path="/review" element={<TriviaReviewPage />} />
             <Route path="/myTrivia" element={<MyTrivia />} />
             <Route path="/signUp" element={<SignUpPage />} />
+            <Route path="/login" element={<LoginPage />} />
           </Routes>
 
         </main>
