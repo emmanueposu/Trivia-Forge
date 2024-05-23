@@ -49,7 +49,7 @@ function MyTrivia() {
         setShow(true);
     }
 
-
+    console.log(userGames);
     return (
         <>
             <title>My Trivia</title>
