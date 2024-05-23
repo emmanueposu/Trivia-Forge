@@ -9,6 +9,7 @@ import { Card } from "react-bootstrap";
 import useStore from '../Components/useStore'; // global state management
 
 
+
 // initialize openai client using configuration specified in vite environment variables 
 // reference: https://platform.openai.com/docs/api-reference/making-requests
 const openai = new OpenAI({
@@ -25,6 +26,7 @@ function TriviaGenPage() {
     const [categories, setCategories] = useState([]);
     const [isMultipleChoice, setIsMultipleChoice] = useState(false);
     const navigate = useNavigate();
+    const user = useStore(state => state.currentUser); // get current user from global state
     // custom hook for adding game to global state
     const addGame = useStore(state => state.addGame);
 
@@ -79,7 +81,7 @@ function TriviaGenPage() {
         }
         //create a new game and category object and add category to game
         //need to change third parameter to current User ID once Users can sign in.
-        let game = new Game(Title, Theme, 1);
+        let game = new Game(Title, Theme, user.id);
 
         for (let i = 0; i < categories.length; i++) {
             let newCategory = new Category(categories[i].name);
