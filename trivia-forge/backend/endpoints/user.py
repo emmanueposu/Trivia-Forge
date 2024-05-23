@@ -3,6 +3,7 @@ from supabase import create_client, Client
 from dotenv import dotenv_values
 
 
+
 bp = Blueprint('user', __name__, url_prefix='/users')
 
 config = dotenv_values("./.env")
@@ -18,6 +19,26 @@ def serialize_user(user):
         "username": user.get("username"),
         "email": user.get("email")
     }
+
+@bp.route('/login', methods=['POST'])
+def login():
+    """Handle user login by verifying email and password"""
+    # get data from the request
+    data = request.get_json()
+    email = data.get('email')
+    password = data.get('password')
+
+    # query users table for email
+    query = supabase.table("Users").select("*").eq("email", email).execute()
+    user = query.data
+
+    # check if user exists and password matches
+    if not user or user[0]['password'] != password:
+        return jsonify({"error": "Invalid email or password"})
+
+    user = user[0]
+    return jsonify(serialize_user(user))
+
 
 
 @bp.route('', methods=['POST', 'GET'])

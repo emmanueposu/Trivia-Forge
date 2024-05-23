@@ -3,6 +3,7 @@ from supabase import create_client, Client
 from dotenv import dotenv_values
 
 
+
 bp = Blueprint('game', __name__, url_prefix='/games')
 
 config = dotenv_values("./.env")
@@ -21,7 +22,11 @@ def post_get_games():
         except Exception as e:
             return {"error": e.details}
     elif request.method == 'GET':
-        query = supabase.table("Games").select("*").execute()
+        user_id = request.args.get('user_id')
+        if user_id:
+            query = supabase.table("Games").select("*").eq("user_id", user_id).execute()
+        else:
+            query = supabase.table("Games").select("*").execute()
         games = query.data
         if not games:
             return {"error": "No games found"}
@@ -44,3 +49,24 @@ def get_patch_delete_game(game_id):
     elif request.method == 'DELETE':
         supabase.table("Games").delete().eq("id", game_id).execute()
         return {}
+
+@bp.route('/games_with_details', methods=['GET'])
+def get_games_with_details():
+    user_id = request.args.get('user_id')  
+    try:
+        games_query = supabase.table("Games").select("*").eq("user_id", user_id).execute()
+        games = games_query.data
+        
+        for game in games:
+            categories_query = supabase.table("Categories").select("*").eq("game_id", game['id']).execute()
+            categories = categories_query.data
+            for category in categories:
+                questions_query = supabase.table("Questions").select("*").eq("category_id", category['id']).execute()
+                questions = questions_query.data
+                category['questions'] = questions
+            game['categories'] = categories
+        
+        return jsonify(games)
+    except Exception as e:
+        print(f"Error fetching games with details: {str(e)}")
+        return jsonify({"error": str(e)})
