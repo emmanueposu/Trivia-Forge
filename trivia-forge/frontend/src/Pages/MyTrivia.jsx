@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import { getGames, getGamesWithDetails } from "../Services/TF-db_services";
+import { getGames, getGamesWithDetails, deleteGame } from "../Services/TF-db_services";
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -14,7 +14,9 @@ import useStore from '../Components/useStore';
 function MyTrivia() {
     // const [games, setGames] = useState(null); // store list of games
     const [show, setShow] = useState(false); // visibility of modal
+    const [showWarning, setShowWarning] = useState(false); // visibility of warning modal
     const [currentGame, setCurrentGame] = useState(null); // store current game
+    const [loaded, setLoaded] = useState(false);
     // const [gamesWithDetails, setGamesWithDetails] = useState([]); // store games from user
     const navigate = useNavigate();
     // const location = useLocation();
@@ -26,11 +28,18 @@ function MyTrivia() {
 
     // fetch game with details when the user changes
     useEffect(() => {
-        if (currentUser && userGames.length === 0) {
+        if (currentUser && !loaded) {
+            setLoaded(true);
+            console.log("calling getGamesWithDetails");
             getGamesWithDetails(currentUser.id).then(res => {
                 setUserGames(res);
             });
         }
+
+        // Cleanup function to reset loaded when component unmounts
+        return () => {
+            setLoaded(false);
+        };
     }, [currentUser, userGames, setUserGames]);
 
     useEffect(() => {
@@ -47,6 +56,18 @@ function MyTrivia() {
     function handleShow(game) {
         setCurrentGame(game);
         setShow(true);
+    }
+    function handleShowWarning(game) {
+        setCurrentGame(game);
+        setShowWarning(true);
+    }
+    function handleWarningClose() {
+        setShowWarning(false);
+    }
+    function handleDelete(game) {
+        deleteGame(game).then(res => {
+            setUserGames(userGames.filter(g => g.id !== game.id));
+        });
     }
 
     console.log(userGames);
@@ -73,6 +94,7 @@ function MyTrivia() {
                                     <div className="text-center">
                                         <Button onClick={() => handleShow(game)} variant="success" className="mx-2">Play</Button>
                                         <Button onClick={() => navigate('/review', { state: { 'game': game, 'page': 'edit' } })} variant="secondary" className="mx-2">Edit</Button>
+                                        <Button onClick={() => handleShowWarning(game)} >Delete</Button>
                                     </div>
                                 </Card.Body>
                             </Card>
@@ -88,6 +110,20 @@ function MyTrivia() {
                 <Modal.Body style={{ backgroundColor: "#240046" }}>
                     <Slideshow data={currentGame} />
                 </Modal.Body>
+            </Modal>
+            <Modal show={showWarning} onHide={handleWarningClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Warning</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Are you sure you want to delete this game?</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleWarningClose}>
+                        No
+                    </Button>
+                    <Button variant="primary" onClick={() => handleDelete(currentGame)}>
+                        Yes
+                    </Button>
+                </Modal.Footer>
             </Modal>
         </>
     );

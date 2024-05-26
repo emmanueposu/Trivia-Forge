@@ -70,7 +70,7 @@ export const getGamesWithDetails = async (user_id) => {
         const response = await axios.get(`${API_URL}/games/games_with_details`, {
             params: { user_id }
         });
-        console.log("response.data:", response.data)
+        //console.log("response.data:", response.data)
         return response.data;
     } catch (error) {
         console.error('Failed to fetch games with details');
