@@ -25,11 +25,10 @@ function MyTrivia() {
     const currentUser = useStore(state => state.currentUser);
     const userGames = useStore(state => state.userGames);
     const setUserGames = useStore(state => state.setUserGames);
-    let CurGame = null;
+
 
     const handleShow = async (game) => {
         setCurrentGame(game);
-        console.log("current game", currentGame);
         setShow(true);
     };
     // const user = location.state?.user;
@@ -38,7 +37,7 @@ function MyTrivia() {
     useEffect(() => {
         if (currentUser && !loaded) {
             setLoaded(true);
-            console.log("calling getGamesWithDetails");
+            //console.log("calling getGamesWithDetails");
             getGamesWithDetails(currentUser.id).then(res => {
                 setUserGames(res);
             });
