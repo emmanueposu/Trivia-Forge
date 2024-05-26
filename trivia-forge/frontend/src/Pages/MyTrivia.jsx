@@ -14,8 +14,10 @@ import useStore from '../Components/useStore';
 function MyTrivia() {
     // const [games, setGames] = useState(null); // store list of games
     const [show, setShow] = useState(false); // visibility of modal
+
     const [showWarning, setShowWarning] = useState(false); // visibility of warning modal
     const [currentGame, setCurrentGame] = useState(null); // store current game
+
     const [loaded, setLoaded] = useState(false);
     // const [gamesWithDetails, setGamesWithDetails] = useState([]); // store games from user
     const navigate = useNavigate();
@@ -23,7 +25,13 @@ function MyTrivia() {
     const currentUser = useStore(state => state.currentUser);
     const userGames = useStore(state => state.userGames);
     const setUserGames = useStore(state => state.setUserGames);
+    let CurGame = null;
 
+    const handleShow = async (game) => {
+        setCurrentGame(game);
+        console.log("current game", currentGame);
+        setShow(true);
+    };
     // const user = location.state?.user;
 
     // fetch game with details when the user changes
@@ -43,7 +51,7 @@ function MyTrivia() {
     }, [currentUser, userGames, setUserGames]);
 
     useEffect(() => {
-        if (currentGame) {
+        if (currentGame && showWarning === false) {
             setShow(true);
         }
     }, [currentGame]);
@@ -53,21 +61,21 @@ function MyTrivia() {
         setCurrentGame(null);
     }
 
-    function handleShow(game) {
-        setCurrentGame(game);
-        setShow(true);
-    }
+
     function handleShowWarning(game) {
         setCurrentGame(game);
+        console.log("current game", currentGame);
         setShowWarning(true);
     }
     function handleWarningClose() {
         setShowWarning(false);
     }
-    function handleDelete(game) {
-        deleteGame(game).then(res => {
-            setUserGames(userGames.filter(g => g.id !== game.id));
+    function handleDelete() {
+        console.log("deleting game", currentGame);
+        deleteGame(currentGame).then(res => {
+            setUserGames(userGames.filter(g => g.id !== currentGame.id));
         });
+        setShowWarning(false);
     }
 
     console.log(userGames);
@@ -104,13 +112,6 @@ function MyTrivia() {
             ) : (
                 <h1 className="text-center mt-5">No games to display.</h1>
             )}
-            <Modal show={show} onHide={handleClose} fullscreen={true}>
-                <Modal.Header data-bs-theme="dark" closeButton style={{ backgroundColor: "#240046", border: "none" }}>
-                </Modal.Header>
-                <Modal.Body style={{ backgroundColor: "#240046" }}>
-                    <Slideshow data={currentGame} />
-                </Modal.Body>
-            </Modal>
             <Modal show={showWarning} onHide={handleWarningClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Warning</Modal.Title>
@@ -125,6 +126,16 @@ function MyTrivia() {
                     </Button>
                 </Modal.Footer>
             </Modal>
+
+            <Modal show={show} onHide={handleClose} fullscreen={true}>
+                <Modal.Header data-bs-theme="dark" closeButton style={{ backgroundColor: "#240046", border: "none" }}>
+                </Modal.Header>
+                <Modal.Body style={{ backgroundColor: "#240046" }}>
+                    <Slideshow data={currentGame} />
+                </Modal.Body>
+            </Modal>
+
+
         </>
     );
 }
