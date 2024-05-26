@@ -19,9 +19,10 @@ function TriviaReviewPage() {
 		navigate('/myTrivia');
 	};
 
-	const HandleCreateGame = () => {
-		AddAllForGame(game);
+	const HandleCreateGame = async () => {
+		await AddAllForGame(game);
 		navigate('/myTrivia');
+
 	};
 
 	return (

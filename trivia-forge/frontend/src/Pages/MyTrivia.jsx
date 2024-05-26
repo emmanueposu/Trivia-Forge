@@ -35,7 +35,8 @@ function MyTrivia() {
 
     // fetch game with details when the user changes
     useEffect(() => {
-        if (currentUser && !loaded) {
+        console.log("loaded:", loaded)
+        if (currentUser && loaded === false) {
             setLoaded(true);
             //console.log("calling getGamesWithDetails");
             getGamesWithDetails(currentUser.id).then(res => {

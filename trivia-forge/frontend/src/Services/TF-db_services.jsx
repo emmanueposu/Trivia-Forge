@@ -153,11 +153,11 @@ export const getQuestion = async (question) => {
 };
 
 export const addQuestion = async (question) => {
-    console.log("questionCategoryID:", question.categoryID)
+    //console.log("questionCategoryID:", question.categoryID)
     let newQuestion = new Question(question.question, question.answer, question.hint, question.multipleChoice, question.categoryID);
     try {
         const response = await axios.post(`${API_URL}/questions`, newQuestion.toJsonObject());
-        console.log("question:", newQuestion.toJsonObject())
+        //console.log("question:", newQuestion.toJsonObject())
         return response.data;
     } catch (error) {
         console.error('Failed to add question');
@@ -278,7 +278,7 @@ export const getChoice = async (choice) => {
 
 export const addChoice = async (choice) => {
     let newChoice = new Choice(choice.text, choice.questionID);
-    console.log("newChoice:", newChoice.toJsonObject())
+    //console.log("newChoice:", newChoice.toJsonObject())
     try {
         const response = await axios.post(`${API_URL}/choices`, newChoice.toJsonObject());
         return response.data;
