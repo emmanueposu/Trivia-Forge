@@ -53,7 +53,7 @@ function MyTrivia() {
     return (
         <>
             <title>My Trivia</title>
-            {/* check if there are games ti display */}
+            {/* check if there are games to display */}
             {userGames.length > 0 ? (
                 <Row xs={2} md={4} className="g-4 m-4">
                     {/* iterate over games */}

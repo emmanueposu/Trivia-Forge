@@ -28,7 +28,7 @@ function LoginPage() {
 
             // set user and games in global store
             setCurrentUser(user);
-            setUserGames(games);
+            // setUserGames(games);
             
             // console.log('User games:', games);
 
