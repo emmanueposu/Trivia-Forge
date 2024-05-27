@@ -121,7 +121,7 @@ def get_games_with_details():
                 category['questions'] = questions
             game['categories'] = categories
             game_details.append(game_detail)
-        print(game_details)
+        #print(game_details)
         return jsonify(game_details)
     except Exception as e:
         print(f"Error fetching games with details: {str(e)}")

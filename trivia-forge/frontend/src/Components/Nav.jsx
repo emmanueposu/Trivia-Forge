@@ -29,10 +29,10 @@ function Navigation() {
                     <Nav.Link href="/triviaGen">Create New Trivia</Nav.Link>
                     <Nav.Link href="/myTrivia">My Trivia</Nav.Link>
                 </Nav>
-                <Nav style={{marginRight: ".5rem"}}>
+                <Nav style={{ marginRight: ".5rem" }}>
                     {currentUser ? (
                         <Button onClick={handleLogout}>
-                            <i className="bi bi-person-circle" style={{ marginRight: ".5rem" }}></i>Logout
+                            <i className="bi bi-person-circle" style={{ marginRight: ".5rem" }}></i>Logout: {currentUser.username}
                         </Button>
                     ) : (
                         <Button onClick={handleShow}>

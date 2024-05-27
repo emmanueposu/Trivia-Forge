@@ -28,13 +28,13 @@ function LoginPage() {
 
             // set user and games in global store
             setCurrentUser(user);
-            // setUserGames(games);
-            
+            //setUserGames(games);
+
             // console.log('User games:', games);
 
             //pass user and games as state to myTrivia page
             navigate('/myTrivia', { state: { user, games } });
-            
+
         } catch (error) {
             console.error('Error during login:', error);
             alert('Error logging in. Please try again.');
