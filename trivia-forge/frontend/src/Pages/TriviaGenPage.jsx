@@ -53,7 +53,7 @@ function TriviaGenPage() {
         for (let i = 0; i < categories.length; i++) {
             let prompt = `Generate ${numberOfQuestions} trivia questions that have an overall theme of ${Theme} about ${categories[i].name}.`;
             if (isMultipleChoice) {
-                prompt += "Each question should be in the format Question:...\nChoice:...\nChoice:...\nChoice:...\nChoice:...\nAnswer:...\nHint:...\n---\nQuestion:... ect. include four multiple-choice options";
+                prompt += "Each question should be in the format Question:...\nChoice:...\nChoice:...\nChoice:...\nChoice:...\nAnswer:...\nHint:...\n---\nQuestion:... ect. Do not include A), B), C), or D) in the choices.";
             } else {
                 prompt += "Each question should be in the format \nQuestion:...\nAnswer:...\n---\nQuestion:... ect.";
             }
@@ -84,7 +84,6 @@ function TriviaGenPage() {
         console.log("User:", user);
         let game = new Game(Title, Theme, user.id);
         console.log("Game:", game);
-
         for (let i = 0; i < categories.length; i++) {
             let newCategory = new Category(categories[i].name);
             console.log(newCategory.name);
@@ -97,15 +96,15 @@ function TriviaGenPage() {
             }
             //loop through sections and create question and choice objects
             for (let i = 0; i < sections.length; i += 7) {
-                let question = sections[i];
+                let question = sections[i].slice(10);
                 let choices = [];
                 for (let k = 0; k < 4; k++) {
                     let choice = sections[i + k + 1];
-                    let newChoice = new Choice(choice);
+                    let newChoice = new Choice(choice.slice(8));
                     choices.push(newChoice);
                 }
-                let answer = sections[i + 5];
-                let hint = sections[i + 6];
+                let answer = sections[i + 5].slice(8);
+                let hint = sections[i + 6].slice(6);
 
                 //create question object and add it to category
                 let newQuestion = new Question(question, answer, hint, isMultipleChoice);
