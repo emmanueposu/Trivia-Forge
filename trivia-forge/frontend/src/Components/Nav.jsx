@@ -29,14 +29,14 @@ function Navigation() {
                     <Nav.Link href="/triviaGen">Create New Trivia</Nav.Link>
                     <Nav.Link href="/myTrivia">My Trivia</Nav.Link>
                 </Nav>
-                <Nav style={{ marginRight: ".5rem" }}>
+                <Nav className="me-2">
                     {currentUser ? (
                         <Button onClick={handleLogout}>
-                            <i className="bi bi-person-circle" style={{ marginRight: ".5rem" }}></i>Logout: {currentUser.username}
+                            <i className="bi bi-person-circle me-2"></i>Logout: {currentUser.username}
                         </Button>
                     ) : (
                         <Button onClick={handleShow}>
-                            <i className="bi bi-person-circle" style={{ marginRight: ".5rem" }}></i>Log In
+                            <i className="bi bi-person-circle me-2"></i>Log In
                         </Button>
                     )}
                 </Nav>

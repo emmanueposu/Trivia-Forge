@@ -7,6 +7,8 @@ import { Choice } from "../Models/Choice";
 import { Category } from "../Models/Category";
 import { Card } from "react-bootstrap";
 import useStore from '../Components/useStore'; // global state management
+import Spinner from 'react-bootstrap/Spinner';
+import Button from 'react-bootstrap/Button';
 
 
 
@@ -25,6 +27,8 @@ function TriviaGenPage() {
     const [Theme, setTheme] = useState('');
     const [categories, setCategories] = useState([]);
     const [isMultipleChoice, setIsMultipleChoice] = useState(false);
+    const [spinnerVisibility, setSpinnerVisibility] = useState("none");
+    const [submitBtnLabel, setSubmitBtnLabel] = useState("Generate");
     const navigate = useNavigate();
     const user = useStore(state => state.currentUser); // get current user from global state
     // custom hook for adding game to global state
@@ -47,6 +51,9 @@ function TriviaGenPage() {
 
     const handleSubmit = async (event) => {
         event.preventDefault(); // prevent default form submission behavior(browser reload)
+
+        setSubmitBtnLabel("Generating...")
+        setSpinnerVisibility("")
 
         let responses = []
 
@@ -131,91 +138,101 @@ function TriviaGenPage() {
 
     // render component as a form
     return (
-        <div>
+        <>
             <title>Create New Trivia</title>
-            <h1>
+            <h1 className="text-center mt-5">
                 Trivia Generator
             </h1>
-            <Card>
-                <form onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label htmlFor="triviaTitle">Title:</label>
-                        <input
-                            type="text"
-                            value={Title}
-                            onChange={e => setTitle(e.target.value)}
-                            className="form-control"
-                            id="triviaTitle"
-                            placeholder="Title"
-                        />
-                    </div>
+            <div className="d-flex justify-content-center">
+                <Card className="mt-4 w-25">
+                    <form onSubmit={handleSubmit}>
+                        <div className="form-group">
+                            <label htmlFor="triviaTitle">Title:</label>
+                            <input
+                                type="text"
+                                value={Title}
+                                onChange={e => setTitle(e.target.value)}
+                                className="form-control"
+                                id="triviaTitle"
+                                placeholder="Title"
+                            />
+                        </div>
 
-                    <div className="form-group">
-                        <label htmlFor="triviaTitle">Theme:</label>
-                        <input
-                            type="text"
-                            value={Theme}
-                            onChange={e => setTheme(e.target.value)}
-                            className="form-control"
-                            id="triviaTheme"
-                            placeholder="Theme"
-                        />
-                    </div>
+                        <div className="form-group">
+                            <label htmlFor="triviaTitle">Theme:</label>
+                            <input
+                                type="text"
+                                value={Theme}
+                                onChange={e => setTheme(e.target.value)}
+                                className="form-control"
+                                id="triviaTheme"
+                                placeholder="Theme"
+                            />
+                        </div>
 
-                    <div className="form-group">
-                        <label htmlFor="triviaTitle">Number of Questions per Category:</label>
-                        <input
-                            type="number"
-                            value={numberOfQuestions}
-                            onChange={e => setNumberOfQuestions(Math.min(10, Math.max(1, parseInt(e.target.value, 10))))}
-                            className="form-control"
-                            id="triviaTitle"
-                            placeholder="Number of Questions"
-                        />
-                    </div>
+                        <div className="form-group">
+                            <label htmlFor="triviaTitle">Number of Questions per Category:</label>
+                            <input
+                                type="number"
+                                value={numberOfQuestions}
+                                onChange={e => setNumberOfQuestions(Math.min(10, Math.max(1, parseInt(e.target.value, 10))))}
+                                className="form-control"
+                                id="triviaTitle"
+                                placeholder="Number of Questions"
+                            />
+                        </div>
 
-                    <div className="form-group">
+                        <div className="form-group">
+                            {categories.map((category, index) => (
+                                <Card key={index} className="CardPadding">
+                                    <div >
+                                        <label>Category Name:</label>
+                                        <input
+                                            type="text"
+                                            value={category.name}
+                                            onChange={e => handleChangeCategoryDetail(index, 'name', e.target.value)}
+                                            className="form-control"
+                                            id="categoryName"
+                                            placeholder="Category"
+                                        />
+                                        <br />
+                                    </div>
+                                </Card>
+                            ))}
+                        </div>
+                        
+                        <button type="button" className="btn btn-secondary ms-4" onClick={handleAddCategory}>Add Category</button>
 
-                        {categories.map((category, index) => (
-                            <Card key={index} className="CardPadding">
-                                <div >
-                                    <label>Category Name:</label>
-                                    <input
-                                        type="text"
-                                        value={category.name}
-                                        onChange={e => handleChangeCategoryDetail(index, 'name', e.target.value)}
-                                        className="form-control"
-                                        id="categoryName"
-                                        placeholder="Category"
-                                    />
+                        <div className="form-group">
+                            <input
+                                type="checkbox"
+                                checked={isMultipleChoice}
+                                onChange={e => setIsMultipleChoice(!isMultipleChoice)}
+                                //className="form-control" 
+                                id="multipleChoice"
+                            />
+                            <label htmlFor="multipleChoice" className="ms-2">Include Multiple Choice Answers</label>
+                        </div>
+                        
+                        <div className="d-flex justify-content-center mb-4">
+                            <Button type="submit" variant="primary">
+                                <Spinner
+                                    as="span"
+                                    animation="border"
+                                    size="sm"
+                                    role="status"
+                                    aria-hidden="true"
+                                    style={{display: spinnerVisibility}}
+                                    className="me-2"
+                                />
+                                {submitBtnLabel}
+                            </Button>
+                        </div>
+                    </form >
+                </Card >
 
-                                    <br />
-                                </div>
-                            </Card>
-
-                        ))}
-
-                    </div>
-                    <button type="button" className="btn btn-secondary" onClick={handleAddCategory}>Add Category</button>
-
-
-
-                    <div className="form-group">
-                        <label htmlFor="multipleChoice">Include Multiple Choice Answers:</label>
-                        <input
-                            type="checkbox"
-                            checked={isMultipleChoice}
-                            onChange={e => setIsMultipleChoice(!isMultipleChoice)}
-                            //className="form-control" 
-                            id="multipleChoice"
-                        />
-                    </div>
-
-                    <button type="submit" className="btn btn-primary">Generate</button>
-                </form >
-            </Card >
-
-        </div >
+            </div >
+        </>
     );
 
 }
