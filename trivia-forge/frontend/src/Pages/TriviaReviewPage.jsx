@@ -11,7 +11,7 @@ function TriviaReviewPage() {
 	// Reference: https://reactrouter.com/en/main/hooks/use-location
 	// pulls object from state property in TriviaGenPage
 	const location = useLocation();
-	const { game, page } = location.state;
+	const { game, page, isMultipleChoice } = location.state;
 	let categories = game.categories;
 	const navigate = useNavigate();
 	const updateGame = useStore(state => state.updateGame);
@@ -53,7 +53,7 @@ function TriviaReviewPage() {
 					<div key={index} className="category-container">
 						<label className="input-label">Category Name:</label>
 						<input type="text" className="input-field" value={cat.title || cat.name} readOnly />
-						<Categories category={cat} index={index} changeValue={changeValue} />
+						<Categories category={cat} index={index} changeValue={changeValue} isMultipleChoice={isMultipleChoice}/>
 					</div>
 				))}
 			</div>

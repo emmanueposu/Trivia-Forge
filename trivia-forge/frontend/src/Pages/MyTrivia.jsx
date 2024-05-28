@@ -45,10 +45,10 @@ function MyTrivia() {
         }
 
         // Cleanup function to reset loaded when component unmounts
-        return () => {
-            setLoaded(false);
-        };
-    }, [currentUser, userGames, setUserGames]);
+        // return () => {
+        //     setLoaded(false);
+        // };
+    }, [loaded]);
 
     useEffect(() => {
         if (currentGame && showWarning === false) {
