@@ -1,16 +1,13 @@
 import React from "react";
 
 
-function Choices({ choices }) {
+function Choices({ data, path, index, changeValue }) {
+    let newPath = structuredClone(path)
+    newPath.push('choices', index)
+
     return (
-        <div>
-            {choices.map((choice, index) => {
-                return (
-                    <div className="card-body" key={index}>
-                        <textarea className="form-control" defaultValue={choice.text}></textarea>
-                    </div>
-                );
-            })}
+        <div className="card-body">
+            <textarea className="form-control" defaultValue={data.text} onChange={(e) => {changeValue(newPath, "text", e.target.value)}}></textarea>
         </div>
     );
 }

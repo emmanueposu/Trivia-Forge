@@ -27,6 +27,13 @@ const useStore = create((set) => ({
         saveToLocalStorage('userGames', updatedGames); // save updated game list
         return { userGames: updatedGames }; // return updated game state
     }),
+    updateGame: (updatedGame) => set((state) => {
+        const updatedGames = state.userGames.map((game) =>
+            game.id === updatedGame.id ? updatedGame : game
+        );
+        saveToLocalStorage('userGames', updatedGames);
+        return { userGames: updatedGames };
+    }),
     logout: () => {
         localStorage.removeItem('currentUser');
         localStorage.removeItem('userGames');

@@ -63,13 +63,13 @@ export const AddAllForGame = async (game) => {
 };
 
 export const UpdateAllForGame = async (game) => {
-    await db.updateGame(game);
+    await db.editGame(game);
     game.categories.forEach(async (category) => {
-        await db.updateCategory(category);
+        await db.editCategory(category);
         category.questions.forEach(async (question) => {
-            await db.updateQuestion(question);
+            await db.editQuestion(question);
             question.choices.forEach(async (choice) => {
-                await db.updateChoice(choice);
+                await db.editChoice(choice);
             });
         });
     });

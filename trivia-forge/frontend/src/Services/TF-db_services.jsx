@@ -120,6 +120,14 @@ export const updateGame = async (game) => {
     }
 }
 
+export const editGame = async (game) => {
+    try {
+        await axios.patch(`${API_URL}/games/${game.id}`, game);
+    } catch (error) {
+        console.error('Failed to edit game');
+    }
+}
+
 /* ************************************************************************************ */
 
 /* ************************************ Questions ************************************** */
@@ -184,6 +192,15 @@ export const updateQuestion = async (question) => {
         return [];
     }
 }
+
+export const editQuestion = async (question) => {
+    try {
+        await axios.patch(`${API_URL}/questions/${question.id}`, question);
+    } catch (error) {
+        console.error('Failed to update question');
+    }
+}
+
 /* ************************************************************************************ */
 
 /* ************************************ Categories ************************************ */
@@ -242,6 +259,14 @@ export const updateCategory = async (category) => {
     } catch (error) {
         console.error('Failed to update category');
         return [];
+    }
+}
+
+export const editCategory = async (category) => {
+    try {
+        await axios.patch(`${API_URL}/categories/${category.id}`, category);
+    } catch (error) {
+        console.error('Failed to edit category');
     }
 }
 
@@ -305,6 +330,14 @@ export const updateChoice = async (choice) => {
     } catch (error) {
         console.error('Failed to update choice');
         return [];
+    }
+}
+
+export const editChoice = async (choice) => {
+    try {
+        await axios.patch(`${API_URL}/choices/${choice.id}`, choice);
+    } catch (error) {
+        console.error('Failed to update choice');
     }
 }
 

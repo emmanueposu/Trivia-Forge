@@ -11,25 +11,33 @@ import { Question } from "../Models/Question";
 
 
 
-function Questions({ data }) {
+function Questions({ data, path, index, changeValue }) {
     let choices = data.choices;
+    let newPath = structuredClone(path)
+    newPath.push('questions', index)
+
     return (
         <div>
             <Card className="CardPadding">
                 <h2 className="centered">Question</h2>
                 //Button to generate new question somewhere in here
                 <div className="card-body">
-                    <textarea className="form-control" defaultValue={data.question}></textarea>
+                    <textarea className="form-control" defaultValue={data.problem || data.question} onChange={(e) => {changeValue(newPath, "problem", e.target.value)}}></textarea>
                 </div>
                 <h2>Choices</h2>
-                <Choices choices={choices} />
+                {choices.map((choice, index) => {
+                    return (
+                        <Choices key={index} data={choice} path={newPath} index={index} changeValue={changeValue}/>
+                    );
+                 })}
+
                 <h2>Answer</h2>
                 <div className="card-body">
-                    <textarea className="form-control" defaultValue={data.answer}></textarea>
+                    <textarea className="form-control" defaultValue={data.answer} onChange={(e) => {changeValue(newPath, "answer", e.target.value)}}></textarea>
                 </div>
                 <h2>Hint</h2>
                 <div className="card-body">
-                    <textarea className="form-control" defaultValue={data.hint}></textarea>
+                    <textarea className="form-control" defaultValue={data.hint} onChange={(e) => {changeValue(newPath, "hint", e.target.value)}}></textarea>
                 </div>
             </Card>
 

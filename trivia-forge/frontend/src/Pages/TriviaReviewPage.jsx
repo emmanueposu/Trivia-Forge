@@ -4,6 +4,7 @@ import Categories from '../Components/Categories';
 import { Button } from 'react-bootstrap';
 import { AddAllForGame, UpdateAllForGame } from '../Services/Services';
 import { useNavigate } from "react-router-dom";
+import useStore from '../Components/useStore';
 import '../App.css';
 
 function TriviaReviewPage() {
@@ -13,9 +14,13 @@ function TriviaReviewPage() {
 	const { game, page } = location.state;
 	let categories = game.categories;
 	const navigate = useNavigate();
+	const updateGame = useStore(state => state.updateGame);
+	
+	console.log(game)
 
 	const HandleSaveGame = () => {
 		UpdateAllForGame(game);
+		updateGame(game)
 		navigate('/myTrivia');
 	};
 
@@ -25,6 +30,20 @@ function TriviaReviewPage() {
 
 	};
 
+	function changeValue(path, key, value) {
+		let current = game
+		for (let i = 0; i < path.length; i++) {
+			current = current[path[i]]
+			if (i == path.length - 1) {
+				current[key] = value
+				// console.log(current)
+				// console.log(game)
+				return
+			}
+		}
+	}
+
+
 	return (
 		<div>
 			<title>Trivia Review</title>
@@ -33,8 +52,8 @@ function TriviaReviewPage() {
 				{categories.map((cat, index) => (
 					<div key={index} className="category-container">
 						<label className="input-label">Category Name:</label>
-						<input type="text" className="input-field" value={cat.name} readOnly />
-						<Categories category={cat} />
+						<input type="text" className="input-field" value={cat.title || cat.name} readOnly />
+						<Categories category={cat} index={index} changeValue={changeValue} />
 					</div>
 				))}
 			</div>

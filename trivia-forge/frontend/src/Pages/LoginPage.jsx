@@ -42,9 +42,9 @@ function LoginPage() {
     };
 
     return (
-        <>
+        <div className="d-flex justify-content-center mt-5">
             <title>Login</title>
-            <Card style={{ width: '35rem', margin: '0 auto', float: 'none' }}>
+            <Card style={{ width: '35rem'}}>
                 <Form onSubmit={handleSubmit} className="form-group">
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
@@ -55,13 +55,14 @@ function LoginPage() {
                         <Form.Label>Password</Form.Label>
                         <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                     </Form.Group>
-
-                    <Button variant="primary" type="submit">
-                        Login
-                    </Button>
+                    <div className="d-flex justify-content-center">
+                        <Button variant="primary" type="submit">
+                            Login
+                        </Button>
+                    </div>
                 </Form>
             </Card>
-        </>
+        </div>
     );
 }
 export default LoginPage;
