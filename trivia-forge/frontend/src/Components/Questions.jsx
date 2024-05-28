@@ -22,7 +22,7 @@ function Questions({ data, path, index, changeValue }) {
                 <h2 className="centered">Question</h2>
                 //Button to generate new question somewhere in here
                 <div className="card-body">
-                    <textarea className="form-control" defaultValue={data.problem} onChange={(e) => {changeValue(newPath, "problem", e.target.value)}}></textarea>
+                    <textarea className="form-control" defaultValue={data.problem || data.question} onChange={(e) => {changeValue(newPath, "problem", e.target.value)}}></textarea>
                 </div>
                 <h2>Choices</h2>
                 {choices.map((choice, index) => {

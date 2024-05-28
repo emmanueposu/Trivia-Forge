@@ -7,7 +7,7 @@ function Categories({ category, index, changeValue}) {
     
     return (
         <div>
-            <h2>{category.title}</h2>
+            <h2>{category.title || category.name}</h2>
             {questions.map((question, index) => {
                 return (
                     <Questions key={index} data={question} path={path} index={index} changeValue={changeValue}/>

@@ -15,7 +15,8 @@ function TriviaReviewPage() {
 	let categories = game.categories;
 	const navigate = useNavigate();
 	const updateGame = useStore(state => state.updateGame);
-
+	
+	console.log(game)
 
 	const HandleSaveGame = () => {
 		UpdateAllForGame(game);
@@ -51,7 +52,7 @@ function TriviaReviewPage() {
 				{categories.map((cat, index) => (
 					<div key={index} className="category-container">
 						<label className="input-label">Category Name:</label>
-						<input type="text" className="input-field" value={cat.title} readOnly />
+						<input type="text" className="input-field" value={cat.title || cat.name} readOnly />
 						<Categories category={cat} index={index} changeValue={changeValue} />
 					</div>
 				))}
