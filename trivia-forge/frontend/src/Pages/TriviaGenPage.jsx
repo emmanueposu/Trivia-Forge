@@ -144,7 +144,7 @@ function TriviaGenPage() {
                 Trivia Generator
             </h1>
             <div className="d-flex justify-content-center">
-                <Card className="mt-4 w-25">
+                <Card className="mt-4" style={{width: "35rem"}}>
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
                             <label htmlFor="triviaTitle">Title:</label>
@@ -213,7 +213,7 @@ function TriviaGenPage() {
                             />
                             <label htmlFor="multipleChoice" className="ms-2">Include Multiple Choice Answers</label>
                         </div>
-                        
+
                         <div className="d-flex justify-content-center mb-4">
                             <Button type="submit" variant="primary">
                                 <Spinner

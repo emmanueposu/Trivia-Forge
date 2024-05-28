@@ -102,7 +102,7 @@ function MyTrivia() {
                                     <div className="text-center">
                                         <Button onClick={() => handleShow(game)} variant="success" className="mx-2">Play</Button>
                                         <Button onClick={() => navigate('/review', { state: { 'game': game, 'page': 'edit' } })} variant="secondary" className="mx-2">Edit</Button>
-                                        <Button onClick={() => handleShowWarning(game)} >Delete</Button>
+                                        <Button onClick={() => handleShowWarning(game)} variant="dark">Delete</Button>
                                     </div>
                                 </Card.Body>
                             </Card>
@@ -110,7 +110,7 @@ function MyTrivia() {
                     ))}
                 </Row>
             ) : (
-                <h1 className="text-center mt-5">No games to display.</h1>
+                <h1 className="text-center mt-5">No games to display</h1>
             )}
             <Modal show={showWarning} onHide={handleWarningClose}>
                 <Modal.Header closeButton>

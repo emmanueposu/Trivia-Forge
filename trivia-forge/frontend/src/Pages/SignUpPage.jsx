@@ -33,9 +33,9 @@ function SignUpPage() {
     }
 
     return (
-        <>
+        <div className="d-flex justify-content-center mt-5">
             <title>Sign Up</title>
-            <Card style={{ width: '35rem', margin: '0 auto', float: 'none' }}>
+            <Card style={{ width: '35rem'}}>
                 <Form onSubmit={handleSubmit} className="form-group">
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
@@ -59,13 +59,14 @@ function SignUpPage() {
                         <Form.Label>Confirm Password</Form.Label>
                         <Form.Control type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
                     </Form.Group>
-
-                    <Button variant="primary" type="submit">
-                        Create Account
-                    </Button>
+                    <div className="d-flex justify-content-center">
+                        <Button variant="primary" type="submit">
+                            Create Account
+                        </Button>
+                    </div>
                 </Form>
             </Card>
-        </>
+        </div>
     );
 }
 export default SignUpPage;
