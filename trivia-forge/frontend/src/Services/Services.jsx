@@ -1,28 +1,6 @@
 import * as db from './TF-db_services';
-import { Game } from '../Models/Game';
-import { Category } from '../Models/Category';
-import { Question } from '../Models/Question';
-import { Choice } from '../Models/Choice';
 
 
-
-// export const AddAllForGame = async (game) => {
-//     const newGame = await db.addGame(game);
-//     game.categories.forEach(async (category) => {
-//         category.gameID = newGame.id;
-//         const newCategory = await db.addCategory(category);
-//         category.questions.forEach(async (question) => {
-//             console.log("Added Category ID", category.id);
-//             question.categoryID = newCategory.id;
-//             const newQuestion = await db.addQuestion(question);
-//             question.choices.forEach(async (choice) => {
-//                 choice.questionID = newQuestion.id;
-//                 await db.addChoice(choice);
-//             });
-//         });
-//     });
-//     return newGame;
-// }
 export const AddAllForGame = async (game) => {
     try {
         // Add the game to the database

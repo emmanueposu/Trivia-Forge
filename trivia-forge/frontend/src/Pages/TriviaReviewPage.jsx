@@ -18,9 +18,9 @@ function TriviaReviewPage() {
 	
 	console.log(game)
 
-	const HandleSaveGame = () => {
-		UpdateAllForGame(game);
+	const HandleSaveGame = async () => {
 		updateGame(game)
+		await UpdateAllForGame(game);
 		navigate('/myTrivia');
 	};
 
