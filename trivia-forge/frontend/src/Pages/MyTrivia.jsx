@@ -62,10 +62,10 @@ function MyTrivia() {
             });
         }
         // Cleanup function to reset loaded when component unmounts
-        return () => {
-            setLoaded(false);
-        };
-    }, [currentUser, userGames, setUserGames]);
+        // return () => {
+        //     setLoaded(false);
+        // };
+    }, [loaded]);
 
 
     function handleGameShow (game) {

@@ -62,7 +62,7 @@ function TriviaGenPage() {
             if (isMultipleChoice) {
                 prompt += "Each question should be in the format Question:...\nChoice:...\nChoice:...\nChoice:...\nChoice:...\nAnswer:...\nHint:...\n---\nQuestion:... ect. Do not include A), B), C), or D) in the choices.";
             } else {
-                prompt += "Each question should be in the format \nQuestion:...\nAnswer:...\n---\nQuestion:... ect.";
+                prompt += "Each question should be in the format \nQuestion:...\nAnswer:...\nHint:...\n---\nQuestion:... ect.";
             }
 
             // api call
@@ -101,28 +101,41 @@ function TriviaGenPage() {
             for (let i = 0; i < sections.length; i++) {
                 if (sections[i] === '') { sections.splice(i, 1); }
             }
+
+
             //loop through sections and create question and choice objects
-            for (let i = 0; i < sections.length; i += 7) {
-                let question = sections[i].slice(10);
-                let choices = [];
-                for (let k = 0; k < 4; k++) {
-                    let choice = sections[i + k + 1];
-                    let newChoice = new Choice(choice.slice(8));
-                    choices.push(newChoice);
+            if (isMultipleChoice) {
+                for (let i = 0; i < sections.length; i += 7) {
+                    let question = sections[i].slice(10);
+                    let choices = [];
+                    for (let k = 0; k < 4; k++) {
+                        let choice = sections[i + k + 1];
+                        let newChoice = new Choice(choice.slice(8));
+                        choices.push(newChoice);
+                    }
+                    let answer = sections[i + 5].slice(8);
+                    let hint = sections[i + 6].slice(6);
+
+                    //create question object and add it to category
+                    let newQuestion = new Question(question, answer, hint, isMultipleChoice);
+                    newCategory.addQuestion(newQuestion);
+
+                    //add choices to question object
+                    for (let i = 0; i < choices.length; i++) {
+                        newQuestion.addChoice(choices[i]);
+                    }
                 }
-                let answer = sections[i + 5].slice(8);
-                let hint = sections[i + 6].slice(6);
-
-                //create question object and add it to category
-                let newQuestion = new Question(question, answer, hint, isMultipleChoice);
-                newCategory.addQuestion(newQuestion);
-
-                //add choices to question object
-                for (let i = 0; i < choices.length; i++) {
-                    newQuestion.addChoice(choices[i]);
+            } else {
+                for (let j = 0; j < sections.length; j += 3) {
+                    let question = sections[j].slice(10);
+                    let answer = sections[j + 1].slice(8);
+                    let hint = sections[j + 2].slice(6);
+    
+                    //create question object and add it to category
+                    let newQuestion = new Question(question, answer, hint, isMultipleChoice);
+                    newCategory.addQuestion(newQuestion);
                 }
             }
-
             console.log("Category Questions:", newCategory.questions);
         }
         console.log("Game Categories", game.categories);
@@ -130,7 +143,7 @@ function TriviaGenPage() {
         // Save game to global state and local storage
         addGame(game);
         // state property to pass data as object to new route
-        navigate('/review', { state: { game: game, page: 'review' } });
+        navigate('/review', { state: { game: game, page: 'review', isMultipleChoice: isMultipleChoice } });
         //console.log(completion.choices[0].message);
 
 

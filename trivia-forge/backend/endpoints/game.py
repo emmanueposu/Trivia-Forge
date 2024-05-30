@@ -103,6 +103,7 @@ def get_patch_delete_game(game_id):
 def get_games_with_details():
     user_id = request.args.get('user_id')  
     try:
+        print(f"Fetching games with details for user_id: {user_id}")
         games_query = supabase.table("Games").select("*").eq("user_id", user_id).execute()
         games = games_query.data
         
@@ -122,6 +123,7 @@ def get_games_with_details():
             game['categories'] = categories
             game_details.append(game_detail)
         #print(game_details)
+        print(f"Returning game details:")
         return jsonify(game_details)
     except Exception as e:
         print(f"Error fetching games with details: {str(e)}")
