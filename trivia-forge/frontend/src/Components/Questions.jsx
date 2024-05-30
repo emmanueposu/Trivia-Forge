@@ -20,7 +20,7 @@ function Questions({ data, path, index, changeValue, isMultipleChoice }) {
         <div>
             <Card className="CardPadding">
                 <h2 className="centered">Question</h2>
-                //Button to generate new question somewhere in here
+                {/* //Button to generate new question somewhere in here */}
                 <div className="card-body">
                     <textarea className="form-control" defaultValue={data.problem || data.question} onChange={(e) => {changeValue(newPath, "problem", e.target.value)}}></textarea>
                 </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Form, Button, Card } from "react-bootstrap";
 import { getUser, getGames } from '../Services/TF-db_services';
 import useStore from '../Components/useStore';
@@ -47,14 +47,15 @@ function LoginPage() {
             <Card style={{ width: '35rem'}}>
                 <Form onSubmit={handleSubmit} className="form-group">
                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Email address</Form.Label>
+                        <Form.Label>Email</Form.Label>
                         <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)} />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                        <Form.Control type="password" placeholder="Enter Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                     </Form.Group>
+                    <p>Not a member? <Link to="/signUp">Sign Up</Link></p>
                     <div className="d-flex justify-content-center">
                         <Button variant="primary" type="submit">
                             Login

@@ -46,7 +46,7 @@ function Slideshow(game) {
                                     ) : (
                                         <div className="d-flex flex-column align-items-center h-100">
                                             <h1 className="p-4">{item.problem}</h1>
-                                            <div className="w-75">
+                                            <div className="w-100">
                                                 {item.choices.map((c, j) => (
                                                     <h4 key={j} className="rounded-5 p-2 w-25 m-auto mt-4" style={{border: "2px solid orange"}}>{c.text}</h4>
                                                 ))}
