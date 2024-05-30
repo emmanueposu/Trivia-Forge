@@ -18,7 +18,7 @@ function LoginPage() {
             // call getUser function to validate user credentials 
             const user = await getUser(email, password);
             // user doesn't exist
-            if (!user) {
+            if (user.error !== undefined) {
                 alert('Error logging in: Invalid email or password');
                 return;
             }
