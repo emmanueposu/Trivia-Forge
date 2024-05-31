@@ -9,6 +9,7 @@ import { Card } from "react-bootstrap";
 import useStore from '../Components/useStore'; // global state management
 import Spinner from 'react-bootstrap/Spinner';
 import Button from 'react-bootstrap/Button';
+import GenBtnTooltip from "../Components/GenBtnTooltip";
 
 
 
@@ -228,18 +229,23 @@ function TriviaGenPage() {
                         </div>
 
                         <div className="d-flex justify-content-center mb-4">
-                            <Button type="submit" variant="primary">
-                                <Spinner
-                                    as="span"
-                                    animation="border"
-                                    size="sm"
-                                    role="status"
-                                    aria-hidden="true"
-                                    style={{display: spinnerVisibility}}
-                                    className="me-2"
-                                />
-                                {submitBtnLabel}
-                            </Button>
+                            {user ? (
+                                <Button type="submit" variant="primary">
+                                    <Spinner
+                                        as="span"
+                                        animation="border"
+                                        size="sm"
+                                        role="status"
+                                        aria-hidden="true"
+                                        style={{display: spinnerVisibility}}
+                                        className="me-2"
+                                    />
+                                    {submitBtnLabel}
+                                </Button>
+                            ) : (
+                                <GenBtnTooltip />
+                                // <p>ok</p>
+                            )}
                         </div>
                     </form >
                 </Card >
