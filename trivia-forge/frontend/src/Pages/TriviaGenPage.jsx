@@ -244,7 +244,6 @@ function TriviaGenPage() {
                                 </Button>
                             ) : (
                                 <GenBtnTooltip />
-                                // <p>ok</p>
                             )}
                         </div>
                     </form >

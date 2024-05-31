@@ -55,7 +55,7 @@ function LoginPage() {
                         <Form.Label>Password</Form.Label>
                         <Form.Control type="password" placeholder="Enter Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                     </Form.Group>
-                    <p>Not a member? <Link to="/signUp">Sign Up</Link></p>
+                    <p>Not a member? <Link to="/signUp" className="text-decoration-none">Sign Up</Link></p>
                     <div className="d-flex justify-content-center">
                         <Button variant="primary" type="submit">
                             Login

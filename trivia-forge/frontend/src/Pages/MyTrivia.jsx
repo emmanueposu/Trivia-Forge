@@ -9,7 +9,7 @@ import GameCategories from "../Components/GameCategories";
 import GameQuestions from "../Components/GameQuestions";
 import Slideshow from "../Components/Slideshow";
 import Modal from 'react-bootstrap/Modal';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useStore from '../Components/useStore';
 
 function MyTrivia() {
@@ -129,7 +129,10 @@ function MyTrivia() {
                 </Row>
             )}
 
-            <h1 className="text-center mt-5" style={{ display: noGamesMsgDisplay }}>No games to display</h1>
+            <div className="text-center mt-5" style={{ display: noGamesMsgDisplay }}>
+                <h1>No games to display</h1>
+                <Link to="/triviaGen" className="text-decoration-none">Add Game</Link>
+            </div>
 
             <Modal show={showWarning} onHide={handleWarningClose}>
                 <Modal.Header closeButton>
