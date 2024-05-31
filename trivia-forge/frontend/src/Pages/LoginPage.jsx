@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Button, Card } from "react-bootstrap";
-import { getUser, getGames } from '../Services/TF-db_services';
-import useStore from '../Components/useStore';
+import { getUser, getGames } from '../services/triviaForgeApiService';
+import useStore from '../hooks/useStore';
 
 function LoginPage() {
     const [email, setEmail] = useState('');

@@ -3,7 +3,7 @@ import { Button, Container, Row, Col} from 'react-bootstrap';
 import '../App.css';
 import { FaRegFolderOpen, FaPlusCircle, FaUserCircle, FaUserPlus } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
-import useStore from "../Components/useStore";
+import useStore from "../hooks/useStore";
 
 function Home() {
     const navigate = useNavigate();

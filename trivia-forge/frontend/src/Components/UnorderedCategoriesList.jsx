@@ -1,6 +1,6 @@
 import { React} from "react";
 
-function GameCategories(game) {
+function UnorderedCategoriesList(game) {
     const categories = game.data.categories;
 
     return (
@@ -14,4 +14,4 @@ function GameCategories(game) {
     )
 }
 
-export default GameCategories;
+export default UnorderedCategoriesList;

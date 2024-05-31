@@ -1,15 +1,15 @@
 import React, { useState } from "react"; // variables that cause the component to re-render when they change
 import OpenAI from "openai";
-import { Game } from "../Models/Game";
+import { Game } from "../models/game";
 import { useNavigate } from "react-router-dom";
-import { Question } from "../Models/Question";
-import { Choice } from "../Models/Choice";
-import { Category } from "../Models/Category";
+import { Question } from "../models/question";
+import { Choice } from "../models/choice";
+import { Category } from "../models/category";
 import { Card } from "react-bootstrap";
-import useStore from '../Components/useStore'; // global state management
+import useStore from '../hooks/useStore'; // global state management
 import Spinner from 'react-bootstrap/Spinner';
 import Button from 'react-bootstrap/Button';
-import GenBtnTooltip from "../Components/GenBtnTooltip";
+import GenerateButtonTooltip from "../components/GenerateButtonTooltip";
 
 
 
@@ -243,7 +243,7 @@ function TriviaGenPage() {
                                     {submitBtnLabel}
                                 </Button>
                             ) : (
-                                <GenBtnTooltip />
+                                <GenerateButtonTooltip />
                             )}
                         </div>
                     </form >

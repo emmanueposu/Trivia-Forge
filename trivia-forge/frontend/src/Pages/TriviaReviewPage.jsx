@@ -1,10 +1,10 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom'; // used to access passed state
-import Categories from '../Components/Categories';
+import ReviewCategories from '../components/ReviewCategories';
 import { Button } from 'react-bootstrap';
-import { AddAllForGame, UpdateAllForGame } from '../Services/Services';
+import { AddAllForGame, UpdateAllForGame } from '../services/saveGameService';
 import { useNavigate } from "react-router-dom";
-import useStore from '../Components/useStore';
+import useStore from '../hooks/useStore';
 import '../App.css';
 
 function TriviaReviewPage() {
@@ -15,6 +15,7 @@ function TriviaReviewPage() {
 	let categories = game.categories;
 	const navigate = useNavigate();
 	const updateGame = useStore(state => state.updateGame);
+	const addGame = useStore(state => state.updateGame);
 	
 	console.log(game)
 
@@ -25,9 +26,10 @@ function TriviaReviewPage() {
 	};
 
 	const HandleCreateGame = async () => {
+		// console.log("new:", game)
+		// addGame(game);
 		await AddAllForGame(game);
 		navigate('/myTrivia');
-
 	};
 
 	function changeValue(path, key, value) {
@@ -53,7 +55,7 @@ function TriviaReviewPage() {
 					<div key={index} className="category-container">
 						<label className="input-label">Category Name:</label>
 						<input type="text" className="input-field" value={cat.title || cat.name} readOnly />
-						<Categories category={cat} index={index} changeValue={changeValue} isMultipleChoice={isMultipleChoice}/>
+						<ReviewCategories category={cat} index={index} changeValue={changeValue} isMultipleChoice={isMultipleChoice}/>
 					</div>
 				))}
 			</div>

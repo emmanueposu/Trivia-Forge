@@ -2,7 +2,7 @@ import React from "react";
 import { Navbar } from "react-bootstrap";
 import { Nav, Button} from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import useStore from './useStore';
+import useStore from '../hooks/useStore';
 
 function Navigation() {
     const currentUser = useStore(state => state.currentUser);

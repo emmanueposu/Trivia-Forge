@@ -1,6 +1,6 @@
 import { React} from "react";
 
-function GameQuestions(game) {
+function QuestionsCount(game) {
     let categories = game?.data.categories || [];
     function questionCount() {
         let count = 0;
@@ -17,4 +17,4 @@ function GameQuestions(game) {
     )
 }
 
-export default GameQuestions;
+export default QuestionsCount;

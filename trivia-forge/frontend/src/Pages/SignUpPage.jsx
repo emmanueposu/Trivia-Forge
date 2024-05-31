@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Form, Button, Card } from "react-bootstrap";
-import { addUser } from '../Services/TF-db_services';
-import { User } from '../Models/User';
+import { addUser } from '../services/triviaForgeApiService';
+import { User } from '../models/user';
 
 function SignUpPage() {
     // initialize variables as empty strings

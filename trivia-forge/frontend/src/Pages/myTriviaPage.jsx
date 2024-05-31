@@ -1,18 +1,18 @@
 import { React, useState, useEffect } from "react";
-import { getGames, getGamesWithDetails, deleteGame } from "../Services/TF-db_services";
+import { getGames, getGamesWithDetails, deleteGame } from "../services/triviaForgeApiService";
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
-import GameCategories from "../Components/GameCategories";
-import GameQuestions from "../Components/GameQuestions";
-import Slideshow from "../Components/Slideshow";
+import UnorderedCategoriesList from "../components/UnorderedCategoriesList";
+import QuestionsCount from "../components/QuestionsCount";
+import Slideshow from "../components/Slideshow";
 import Modal from 'react-bootstrap/Modal';
 import { Link, useNavigate } from "react-router-dom";
-import useStore from '../Components/useStore';
+import useStore from '../hooks/useStore';
 
-function MyTrivia() {
+function MyTriviaPage() {
     // const [games, setGames] = useState(null); // store list of games
     const [showGame, setShowGame] = useState(false); // visibility of game modal
 
@@ -51,7 +51,7 @@ function MyTrivia() {
         console.log("loaded:", loaded)
         if (currentUser && loaded === false) {
             setLoaded(true);
-            //console.log("calling getGamesWithDetails");
+            console.log("calling getGamesWithDetails");
             getGamesWithDetails(currentUser.id).then(res => {
                 setSpinnerDisplay("none")
                 if (res.length > 0) {
@@ -111,11 +111,11 @@ function MyTrivia() {
                                 <Card.Body>
                                     <Card.Title as="h6">Categories:</Card.Title>
                                     <Card.Text>
-                                        <GameCategories data={game} />
+                                        <UnorderedCategoriesList data={game} />
                                     </Card.Text>
                                     <Card.Title as="h6">Questions:</Card.Title>
                                     <Card.Text>
-                                        <GameQuestions data={game} />
+                                        <QuestionsCount data={game} />
                                     </Card.Text>
                                     <div className="text-center">
                                         <Button onClick={() => handleGameShow(game)} variant="success">Play</Button>
@@ -160,4 +160,4 @@ function MyTrivia() {
     );
 };
 
-export default MyTrivia;
+export default MyTriviaPage;

@@ -1,7 +1,7 @@
 import React from "react";
-import Questions from "../Components/Questions";
+import ReviewQuestions from "../components/ReviewQuestions";
 
-function Categories({ category, index, changeValue, isMultipleChoice }) {
+function ReviewCategories({ category, index, changeValue, isMultipleChoice }) {
     let questions = category.questions;
     const path = ['categories', index];
     
@@ -10,10 +10,10 @@ function Categories({ category, index, changeValue, isMultipleChoice }) {
             <h2>{category.title || category.name}</h2>
             {questions.map((question, index) => {
                 return (
-                    <Questions key={index} data={question} path={path} index={index} changeValue={changeValue} isMultipleChoice={isMultipleChoice}/>
+                    <ReviewQuestions key={index} data={question} path={path} index={index} changeValue={changeValue} isMultipleChoice={isMultipleChoice}/>
                 );
             })}
         </div>
     );
 }
-export default Categories;
+export default ReviewCategories;

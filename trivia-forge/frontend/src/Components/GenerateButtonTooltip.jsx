@@ -2,7 +2,7 @@ import Button from 'react-bootstrap/Button';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 
-function GenBtnTooltip() {
+function GenerateButtonTooltip() {
   return (
     <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Log in to generate a game.</Tooltip>}>
       <span className="d-inline-block">
@@ -14,4 +14,4 @@ function GenBtnTooltip() {
   );
 };
 
-export default GenBtnTooltip;
+export default GenerateButtonTooltip;
