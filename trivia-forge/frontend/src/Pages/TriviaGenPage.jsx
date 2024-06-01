@@ -1,15 +1,15 @@
 import React, { useState } from "react"; // variables that cause the component to re-render when they change
 import OpenAI from "openai";
-import { Game } from "../models/game";
+import { Game } from "../Models/Game";
 import { useNavigate } from "react-router-dom";
-import { Question } from "../models/question";
-import { Choice } from "../models/choice";
-import { Category } from "../models/category";
+import { Question } from "../Models/Question";
+import { Choice } from "../Models/Choice";
+import { Category } from "../Models/Category";
 import { Card } from "react-bootstrap";
 import useStore from '../hooks/useStore'; // global state management
 import Spinner from 'react-bootstrap/Spinner';
 import Button from 'react-bootstrap/Button';
-import GenerateButtonTooltip from "../components/GenerateButtonTooltip";
+import GenerateButtonTooltip from "../Components/GenerateButtonTooltip";
 
 // initialize openai client using configuration specified in vite environment variables 
 // reference: https://platform.openai.com/docs/api-reference/making-requests
@@ -23,16 +23,24 @@ function TriviaGenPage() {
     const [numberOfQuestions, setNumberOfQuestions] = useState('');
     const [Title, setTitle] = useState('');
     const [Theme, setTheme] = useState('');
-    const [categories, setCategories] = useState([]);
+    const [categories, setCategories] = useState([{ name: '' }]);
     const [isMultipleChoice, setIsMultipleChoice] = useState(false);
     const [spinnerVisibility, setSpinnerVisibility] = useState("none");
     const [submitBtnLabel, setSubmitBtnLabel] = useState("Generate");
     const navigate = useNavigate();
     const user = useStore(state => state.currentUser); // get current user from global state
+    const [categoryCount, setCategoryCount] = useState(1);
 
     const handleAddCategory = () => {
-        const newCategory = { name: '' };
-        setCategories([...categories, newCategory]);
+        if (categoryCount >= 5) {
+            return;
+        }
+        else {
+            const newCategory = { name: '' };
+            setCategories([...categories, newCategory]);
+            let count = categoryCount
+            setCategoryCount(count + 1);
+        }
     };
 
     const handleChangeCategoryDetail = (index, field, value) => {
@@ -124,7 +132,7 @@ function TriviaGenPage() {
                     let question = sections[j].slice(10);
                     let answer = sections[j + 1].slice(8);
                     let hint = sections[j + 2].slice(6);
-    
+
                     //create question object and add it to category
                     let newQuestion = new Question(question, answer, hint, isMultipleChoice);
                     newCategory.addQuestion(newQuestion);
@@ -149,9 +157,9 @@ function TriviaGenPage() {
             <h1 className="text-center mt-5">
                 Trivia Generator
             </h1>
-            
+
             <div className="d-flex justify-content-center">
-                <Card className="mt-4" style={{width: "35rem"}}>
+                <Card className="mt-4" style={{ width: "35rem" }}>
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
                             <label htmlFor="triviaTitle">Title:</label>
@@ -162,6 +170,7 @@ function TriviaGenPage() {
                                 className="form-control"
                                 id="triviaTitle"
                                 placeholder="Title"
+                                required
                             />
                         </div>
 
@@ -174,6 +183,7 @@ function TriviaGenPage() {
                                 className="form-control"
                                 id="triviaTheme"
                                 placeholder="Theme"
+                                required
                             />
                         </div>
 
@@ -186,6 +196,7 @@ function TriviaGenPage() {
                                 className="form-control"
                                 id="triviaTitle"
                                 placeholder="Number of Questions"
+                                required
                             />
                         </div>
 
@@ -201,13 +212,14 @@ function TriviaGenPage() {
                                             className="form-control"
                                             id="categoryName"
                                             placeholder="Category"
+                                            required
                                         />
                                         <br />
                                     </div>
                                 </Card>
                             ))}
                         </div>
-                        
+
                         <button type="button" className="btn btn-secondary ms-4" onClick={handleAddCategory}>Add Category</button>
 
                         <div className="form-group">
@@ -230,7 +242,7 @@ function TriviaGenPage() {
                                         size="sm"
                                         role="status"
                                         aria-hidden="true"
-                                        style={{display: spinnerVisibility}}
+                                        style={{ display: spinnerVisibility }}
                                         className="me-2"
                                     />
                                     {submitBtnLabel}
