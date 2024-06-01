@@ -14,6 +14,7 @@ const getFromLocalStorage = (key) => {
 const useStore = create((set) => ({
     currentUser: getFromLocalStorage('currentUser'), // initialize current user from local storage 
     userGames: getFromLocalStorage('userGames') || [], // initialize user games if null set empty array
+    loaded: getFromLocalStorage('loaded') || false,
     setCurrentUser: (user) => {
         saveToLocalStorage('currentUser', user);
         set({ currentUser: user });
@@ -34,10 +35,15 @@ const useStore = create((set) => ({
         saveToLocalStorage('userGames', updatedGames);
         return { userGames: updatedGames };
     }),
+    setLoaded: (bool) => {
+        saveToLocalStorage('loaded', bool);
+        set({ loaded: bool });
+    },
     logout: () => {
         localStorage.removeItem('currentUser');
         localStorage.removeItem('userGames');
-        set({ currentUser: null, userGames: [] });
+        localStorage.removeItem('loaded');
+        set({ currentUser: null, userGames: [], loaded: false });
     },
 }));
 

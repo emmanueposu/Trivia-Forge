@@ -142,7 +142,8 @@ function TriviaGenPage() {
         console.log("Game Categories", game.categories);
 
         // Save game to global state and local storage
-        addGame(game);
+        console.log("test:", game)
+        // addGame(game);
         // state property to pass data as object to new route
         navigate('/review', { state: { game: game, page: 'review', isMultipleChoice: isMultipleChoice } });
         //console.log(completion.choices[0].message);

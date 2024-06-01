@@ -23,21 +23,17 @@ function MyTriviaPage() {
     const [showWarning, setShowWarning] = useState(false); // visibility of warning modal
     const [currentGame, setCurrentGame] = useState(null); // store current game
 
-    const [loaded, setLoaded] = useState(false);
+    // const [loaded, setLoaded] = useState(false);
     // const [gamesWithDetails, setGamesWithDetails] = useState([]); // store games from user
     const navigate = useNavigate();
     // const location = useLocation();
     const currentUser = useStore(state => state.currentUser);
     const userGames = useStore(state => state.userGames);
     const setUserGames = useStore(state => state.setUserGames);
+    const loaded = useStore(state => state.loaded);
+    const setLoaded = useStore(state => state.setLoaded);
 
-
-    useEffect(() => {
-        if (currentUser && userGames.length === 0) {
-            setSpinnerDisplay("flex");
-        }
-    }, []);
-
+    
     useEffect(() => {
         if (!currentUser) {
             setNoGamesMsgDisplay("");
@@ -50,22 +46,23 @@ function MyTriviaPage() {
     useEffect(() => {
         console.log("loaded:", loaded)
         if (currentUser && loaded === false) {
-            setLoaded(true);
-            console.log("calling getGamesWithDetails");
+            setSpinnerDisplay("flex");
+            // console.log("calling getGamesWithDetails");
             getGamesWithDetails(currentUser.id).then(res => {
-                setSpinnerDisplay("none")
                 if (res.length > 0) {
                     setUserGames(res);
                 } else {
                     setNoGamesMsgDisplay("");
                 }
+                setLoaded(true);
+                setSpinnerDisplay("none")
             });
+        } else if (currentUser && loaded === true) {
+            if (userGames.length === 0) {
+                setNoGamesMsgDisplay("");
+            }
         }
-        // Cleanup function to reset loaded when component unmounts
-        // return () => {
-        //     setLoaded(false);
-        // };
-    }, [loaded]);
+    }, [userGames]);
 
 
     function handleGameShow (game) {

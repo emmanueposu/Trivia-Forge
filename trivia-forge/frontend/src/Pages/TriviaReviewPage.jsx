@@ -15,20 +15,19 @@ function TriviaReviewPage() {
 	let categories = game.categories;
 	const navigate = useNavigate();
 	const updateGame = useStore(state => state.updateGame);
-	const addGame = useStore(state => state.updateGame);
+	const addGame = useStore(state => state.addGame);
 	
 	console.log(game)
 
-	const HandleSaveGame = async () => {
-		updateGame(game)
+	const HandleUpdateGame = async () => {
 		await UpdateAllForGame(game);
+		updateGame(game)
 		navigate('/myTrivia');
 	};
 
 	const HandleCreateGame = async () => {
-		// console.log("new:", game)
-		// addGame(game);
-		await AddAllForGame(game);
+		const newGame = await AddAllForGame(game);
+		addGame(newGame);
 		navigate('/myTrivia');
 	};
 
@@ -61,7 +60,7 @@ function TriviaReviewPage() {
 			</div>
 			<div className="trivia-button-container">
 				{page === 'edit' ? (
-					<Button variant="primary" onClick={HandleSaveGame} className="trivia-review-button">
+					<Button variant="primary" onClick={HandleUpdateGame} className="trivia-review-button">
 						Save Changes
 					</Button>
 				) : (
