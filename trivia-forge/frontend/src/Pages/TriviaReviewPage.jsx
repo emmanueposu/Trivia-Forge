@@ -33,12 +33,11 @@ function TriviaReviewPage() {
 
 	function changeValue(path, key, value) {
 		let current = game
+		
 		for (let i = 0; i < path.length; i++) {
 			current = current[path[i]]
 			if (i == path.length - 1) {
 				current[key] = value
-				// console.log(current)
-				// console.log(game)
 				return
 			}
 		}
@@ -48,6 +47,7 @@ function TriviaReviewPage() {
 	return (
 		<div>
 			<title>Trivia Review</title>
+
 			<div className="trivia-review-container">
 				<h1 className="trivia-review-heading">Review and Edit Trivia Questions</h1>
 				{categories.map((cat, index) => (
@@ -58,6 +58,7 @@ function TriviaReviewPage() {
 					</div>
 				))}
 			</div>
+
 			<div className="trivia-button-container">
 				{page === 'edit' ? (
 					<Button variant="primary" onClick={HandleUpdateGame} className="trivia-review-button">

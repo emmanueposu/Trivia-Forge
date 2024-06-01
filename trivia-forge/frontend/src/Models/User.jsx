@@ -1,4 +1,3 @@
-import datetime from 'node-datetime';
 export class User {
     constructor(date, email, password, username, profilePic = null) {
         // this.id = null;

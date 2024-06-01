@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { User } from '../models/user';
 import { Game } from '../models/game';
 import { Question } from '../models/question';
 import { Category } from '../models/category';

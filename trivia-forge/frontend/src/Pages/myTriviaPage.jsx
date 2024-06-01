@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import { getGames, getGamesWithDetails, deleteGame } from "../services/triviaForgeApiService";
+import { getGamesWithDetails, deleteGame } from "../services/triviaForgeApiService";
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -12,39 +12,27 @@ import Modal from 'react-bootstrap/Modal';
 import { Link, useNavigate } from "react-router-dom";
 import useStore from '../hooks/useStore';
 
+
 function MyTriviaPage() {
-    // const [games, setGames] = useState(null); // store list of games
     const [showGame, setShowGame] = useState(false); // visibility of game modal
-
     const [spinnerDisplay, setSpinnerDisplay] = useState("none");
-
     const [noGamesMsgDisplay, setNoGamesMsgDisplay] = useState("none");
-
     const [showWarning, setShowWarning] = useState(false); // visibility of warning modal
     const [currentGame, setCurrentGame] = useState(null); // store current game
-
-    // const [loaded, setLoaded] = useState(false);
-    // const [gamesWithDetails, setGamesWithDetails] = useState([]); // store games from user
     const navigate = useNavigate();
-    // const location = useLocation();
     const currentUser = useStore(state => state.currentUser);
     const userGames = useStore(state => state.userGames);
     const setUserGames = useStore(state => state.setUserGames);
     const loaded = useStore(state => state.loaded);
     const setLoaded = useStore(state => state.setLoaded);
 
-    
     useEffect(() => {
         if (!currentUser) {
             setNoGamesMsgDisplay("");
         }
     }, []);
-
-    // const user = location.state?.user;
-
     // fetch game with details when the user changes
     useEffect(() => {
-        console.log("loaded:", loaded)
         if (currentUser && loaded === false) {
             setSpinnerDisplay("flex");
             // console.log("calling getGamesWithDetails");
@@ -64,7 +52,6 @@ function MyTriviaPage() {
         }
     }, [userGames]);
 
-
     function handleGameShow (game) {
         setCurrentGame(game);
         setShowGame(true);
@@ -72,7 +59,6 @@ function MyTriviaPage() {
     function handleGameClose() {
         setShowGame(false);
     };
-
 
     function handleShowWarning(game) {
         setCurrentGame(game);
@@ -105,15 +91,18 @@ function MyTriviaPage() {
                         <Col key={index}>
                             <Card className="" style={{ backgroundColor: "#f5f3f4" }}>
                                 <Card.Header as="h4">{game.title}</Card.Header>
+
                                 <Card.Body>
                                     <Card.Title as="h6">Categories:</Card.Title>
                                     <Card.Text>
                                         <UnorderedCategoriesList data={game} />
                                     </Card.Text>
+
                                     <Card.Title as="h6">Questions:</Card.Title>
                                     <Card.Text>
                                         <QuestionsCount data={game} />
                                     </Card.Text>
+
                                     <div className="text-center">
                                         <Button onClick={() => handleGameShow(game)} variant="success">Play</Button>
                                         <Button onClick={() => navigate('/review', { state: { 'game': game, 'page': 'edit' } })} variant="secondary" className="mx-3">Edit</Button>
@@ -128,6 +117,7 @@ function MyTriviaPage() {
 
             <div className="text-center mt-5" style={{ display: noGamesMsgDisplay }}>
                 <h1>No games to display</h1>
+
                 <Link to="/triviaGen" className="text-decoration-none">Add Game</Link>
             </div>
 
@@ -135,11 +125,14 @@ function MyTriviaPage() {
                 <Modal.Header closeButton>
                     <Modal.Title>Warning</Modal.Title>
                 </Modal.Header>
+
                 <Modal.Body>Are you sure you want to delete this game?</Modal.Body>
+
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleWarningClose}>
                         No
                     </Button>
+                    
                     <Button variant="primary" onClick={() => handleDelete(currentGame)}>
                         Yes
                     </Button>
@@ -149,6 +142,7 @@ function MyTriviaPage() {
             <Modal show={showGame} onHide={handleGameClose} fullscreen={true}>
                 <Modal.Header data-bs-theme="dark" closeButton style={{ backgroundColor: "#240046", border: "none" }}>
                 </Modal.Header>
+                
                 <Modal.Body style={{ backgroundColor: "#240046" }}>
                     <Slideshow data={currentGame} />
                 </Modal.Body>

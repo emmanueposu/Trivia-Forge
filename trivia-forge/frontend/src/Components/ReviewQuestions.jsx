@@ -1,15 +1,14 @@
 import React from "react";
 import ReviewChoices from "../components/ReviewChoices";
 import { Card } from "react-bootstrap";
-
 import { Question } from "../models/question";
+
+
 //logic for button to generate new question
 //
 //
 //
 //
-
-
 
 function ReviewQuestions({ data, path, index, changeValue, isMultipleChoice }) {
     let choices = data.choices;
@@ -25,6 +24,7 @@ function ReviewQuestions({ data, path, index, changeValue, isMultipleChoice }) {
                 <div className="card-body">
                     <textarea className="form-control" defaultValue={data.problem || data.question} onChange={(e) => {changeValue(newPath, key, e.target.value)}}></textarea>
                 </div>
+
                 {isMultipleChoice && (
                     <>
                         <h2>Choices</h2>
@@ -34,17 +34,18 @@ function ReviewQuestions({ data, path, index, changeValue, isMultipleChoice }) {
                             );
                         })}
                     </>
-                )}        
+                )}
+
                 <h2>Answer</h2>
                 <div className="card-body">
                     <textarea className="form-control" defaultValue={data.answer} onChange={(e) => {changeValue(newPath, "answer", e.target.value)}}></textarea>
                 </div>
+
                 <h2>Hint</h2>
                 <div className="card-body">
                     <textarea className="form-control" defaultValue={data.hint} onChange={(e) => {changeValue(newPath, "hint", e.target.value)}}></textarea>
                 </div>
             </Card>
-
         </div >
     )
 }

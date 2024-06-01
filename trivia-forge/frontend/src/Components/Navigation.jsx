@@ -4,6 +4,7 @@ import { Nav, Button} from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import useStore from '../hooks/useStore';
 
+
 function Navigation() {
     const currentUser = useStore(state => state.currentUser);
     const logout = useStore(state => state.logout);
@@ -14,7 +15,6 @@ function Navigation() {
         navigate('/');
     }
 
-
     return (
         <>
             <Navbar bg="dark" data-bs-theme="dark">
@@ -23,6 +23,7 @@ function Navigation() {
                     <Nav.Link href="/triviaGen">Create New Trivia</Nav.Link>
                     <Nav.Link href="/myTrivia">My Trivia</Nav.Link>
                 </Nav>
+                
                 <Nav className="me-2">
                     {currentUser ? (
                         <Button onClick={handleLogout}>
@@ -38,4 +39,5 @@ function Navigation() {
         </>
     );
 }
+
 export default Navigation;

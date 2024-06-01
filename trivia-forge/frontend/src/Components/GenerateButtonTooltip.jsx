@@ -2,6 +2,7 @@ import Button from 'react-bootstrap/Button';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 
+
 function GenerateButtonTooltip() {
   return (
     <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Log in to generate a game.</Tooltip>}>

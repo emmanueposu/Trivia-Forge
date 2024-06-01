@@ -4,11 +4,9 @@ import Button from "react-bootstrap/esm/Button";
 
 
 function Slideshow(game) {
-    
     const [showHint, setShowHint] = useState(null);
     const [questionsAndAnswers, setquestionsAndAnswers] = useState(null);
 
-    
     useEffect(() => {
         let temp = [];
         for (const category of game.data.categories) {
@@ -21,7 +19,6 @@ function Slideshow(game) {
         setShowHint(new Array(temp.length / 2).fill(false));
     }, []);
 
-
     function handleShowHint(index) {
         const newState = [...showHint];
         if(!newState[index]) {
@@ -32,7 +29,6 @@ function Slideshow(game) {
             setShowHint(newState)
         }
     }
-
 
     return (
         <div className="h-100 d-flex justify-content-center">
@@ -46,11 +42,13 @@ function Slideshow(game) {
                                     ) : (
                                         <div className="d-flex flex-column align-items-center h-100">
                                             <h1 className="p-4">{item.problem}</h1>
+                                            
                                             <div className="w-100">
                                                 {item.choices.map((c, j) => (
                                                     <h4 key={j} className="rounded-5 p-2 w-25 m-auto mt-4" style={{border: "2px solid orange"}}>{c.text}</h4>
                                                 ))}
                                             </div>
+                                            
                                             <Button onClick={() => handleShowHint(i)} className="mt-5" style={{backgroundColor: "turquoise", border:"none", color:"#240046" }}>Hint</Button>
                                             {showHint[i] && (
                                                 <h4 className="mt-3">{item.hint}</h4>   

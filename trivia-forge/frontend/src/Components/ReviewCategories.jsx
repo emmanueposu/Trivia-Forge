@@ -1,6 +1,7 @@
 import React from "react";
 import ReviewQuestions from "../components/ReviewQuestions";
 
+
 function ReviewCategories({ category, index, changeValue, isMultipleChoice }) {
     let questions = category.questions;
     const path = ['categories', index];
@@ -16,4 +17,5 @@ function ReviewCategories({ category, index, changeValue, isMultipleChoice }) {
         </div>
     );
 }
+
 export default ReviewCategories;

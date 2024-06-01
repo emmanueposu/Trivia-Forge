@@ -11,4 +11,4 @@ export class Choice {
             question_id: this.questionID
         }
     }
-}   
+}
