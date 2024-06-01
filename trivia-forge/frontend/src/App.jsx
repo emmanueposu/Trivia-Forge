@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./Pages/HomePage";
-import Navigation from "./Components/Nav";
-import TriviaGenPage from './Pages/TriviaGenPage';
-import TriviaReviewPage from './Pages/TriviaReviewPage';
-import MyTrivia from './Pages/MyTrivia';
-import LoginPage from './Pages/LoginPage';
-import SignUpPage from './Pages/SignUpPage';
+import Home from "./pages/homePage";
+import Navigation from "./components/Navigation";
+import TriviaGenPage from './pages/triviaGenPage';
+import TriviaReviewPage from './pages/triviaReviewPage';
+import MyTriviaPage from './pages/myTriviaPage';
+import LoginPage from './pages/loginPage';
+import SignUpPage from './pages/signUpPage';
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -28,7 +28,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/triviaGen" element={<TriviaGenPage />} />
             <Route path="/review" element={<TriviaReviewPage />} />
-            <Route path="/myTrivia" element={<MyTrivia />} />
+            <Route path="/myTrivia" element={<MyTriviaPage />} />
             <Route path="/signUp" element={<SignUpPage />} />
             <Route path="/login" element={<LoginPage />} />
           </Routes>

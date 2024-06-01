@@ -1,7 +1,6 @@
 import React from "react";
 
-
-function Choices({ data, path, index, changeValue }) {
+function ReviewChoices({ data, path, index, changeValue }) {
     let newPath = structuredClone(path)
     newPath.push('choices', index)
 
@@ -11,4 +10,5 @@ function Choices({ data, path, index, changeValue }) {
         </div>
     );
 }
-export default Choices;
+
+export default ReviewChoices;

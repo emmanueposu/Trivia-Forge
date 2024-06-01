@@ -1,9 +1,8 @@
 import axios from 'axios';
-import { User } from '../Models/User';
-import { Game } from '../Models/Game';
-import { Question } from '../Models/Question';
-import { Category } from '../Models/Category';
-import { Choice } from '../Models/Choice';
+import { Game } from '../models/game';
+import { Question } from '../models/question';
+import { Category } from '../models/category';
+import { Choice } from '../models/choice';
 
 const API_URL = 'http://127.0.0.1:5000';
 

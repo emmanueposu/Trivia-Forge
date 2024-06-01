@@ -1,16 +1,15 @@
 import React, { useState } from "react"; // variables that cause the component to re-render when they change
 import OpenAI from "openai";
-import { Game } from "../Models/Game";
+import { Game } from "../models/game";
 import { useNavigate } from "react-router-dom";
-import { Question } from "../Models/Question";
-import { Choice } from "../Models/Choice";
-import { Category } from "../Models/Category";
+import { Question } from "../models/question";
+import { Choice } from "../models/choice";
+import { Category } from "../models/category";
 import { Card } from "react-bootstrap";
-import useStore from '../Components/useStore'; // global state management
+import useStore from '../hooks/useStore'; // global state management
 import Spinner from 'react-bootstrap/Spinner';
 import Button from 'react-bootstrap/Button';
-
-
+import GenerateButtonTooltip from "../components/GenerateButtonTooltip";
 
 // initialize openai client using configuration specified in vite environment variables 
 // reference: https://platform.openai.com/docs/api-reference/making-requests
@@ -22,7 +21,6 @@ const openai = new OpenAI({
 function TriviaGenPage() {
     // state hooks for managaing number of questions and catergory input by user 
     const [numberOfQuestions, setNumberOfQuestions] = useState('');
-    const [category, setCategory] = useState('');
     const [Title, setTitle] = useState('');
     const [Theme, setTheme] = useState('');
     const [categories, setCategories] = useState([]);
@@ -31,8 +29,6 @@ function TriviaGenPage() {
     const [submitBtnLabel, setSubmitBtnLabel] = useState("Generate");
     const navigate = useNavigate();
     const user = useStore(state => state.currentUser); // get current user from global state
-    // custom hook for adding game to global state
-    const addGame = useStore(state => state.addGame);
 
     const handleAddCategory = () => {
         const newCategory = { name: '' };
@@ -91,18 +87,16 @@ function TriviaGenPage() {
         console.log("User:", user);
         let game = new Game(Title, Theme, user.id);
         console.log("Game:", game);
+
         for (let i = 0; i < categories.length; i++) {
             let newCategory = new Category(categories[i].name);
             console.log(newCategory.name);
             game.addCategory(newCategory);
-
             //parse response from API
             let sections = responses[i]; // store trivia questions
             for (let i = 0; i < sections.length; i++) {
                 if (sections[i] === '') { sections.splice(i, 1); }
             }
-
-
             //loop through sections and create question and choice objects
             if (isMultipleChoice) {
                 for (let i = 0; i < sections.length; i += 7) {
@@ -141,21 +135,21 @@ function TriviaGenPage() {
         console.log("Game Categories", game.categories);
 
         // Save game to global state and local storage
-        addGame(game);
+        console.log("test:", game)
+        // addGame(game);
         // state property to pass data as object to new route
         navigate('/review', { state: { game: game, page: 'review', isMultipleChoice: isMultipleChoice } });
         //console.log(completion.choices[0].message);
-
-
     };
-
     // render component as a form
     return (
         <>
             <title>Create New Trivia</title>
+
             <h1 className="text-center mt-5">
                 Trivia Generator
             </h1>
+            
             <div className="d-flex justify-content-center">
                 <Card className="mt-4" style={{width: "35rem"}}>
                     <form onSubmit={handleSubmit}>
@@ -228,18 +222,22 @@ function TriviaGenPage() {
                         </div>
 
                         <div className="d-flex justify-content-center mb-4">
-                            <Button type="submit" variant="primary">
-                                <Spinner
-                                    as="span"
-                                    animation="border"
-                                    size="sm"
-                                    role="status"
-                                    aria-hidden="true"
-                                    style={{display: spinnerVisibility}}
-                                    className="me-2"
-                                />
-                                {submitBtnLabel}
-                            </Button>
+                            {user ? (
+                                <Button type="submit" variant="primary">
+                                    <Spinner
+                                        as="span"
+                                        animation="border"
+                                        size="sm"
+                                        role="status"
+                                        aria-hidden="true"
+                                        style={{display: spinnerVisibility}}
+                                        className="me-2"
+                                    />
+                                    {submitBtnLabel}
+                                </Button>
+                            ) : (
+                                <GenerateButtonTooltip />
+                            )}
                         </div>
                     </form >
                 </Card >
@@ -249,4 +247,5 @@ function TriviaGenPage() {
     );
 
 }
+
 export default TriviaGenPage;

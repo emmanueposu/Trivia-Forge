@@ -1,10 +1,10 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom'; // used to access passed state
-import Categories from '../Components/Categories';
+import ReviewCategories from '../components/ReviewCategories';
 import { Button } from 'react-bootstrap';
-import { AddAllForGame, UpdateAllForGame } from '../Services/Services';
+import { AddAllForGame, UpdateAllForGame } from '../services/saveGameService';
 import { useNavigate } from "react-router-dom";
-import useStore from '../Components/useStore';
+import useStore from '../hooks/useStore';
 import '../App.css';
 
 function TriviaReviewPage() {
@@ -15,29 +15,29 @@ function TriviaReviewPage() {
 	let categories = game.categories;
 	const navigate = useNavigate();
 	const updateGame = useStore(state => state.updateGame);
+	const addGame = useStore(state => state.addGame);
 	
 	console.log(game)
 
-	const HandleSaveGame = () => {
-		UpdateAllForGame(game);
+	const HandleUpdateGame = async () => {
+		await UpdateAllForGame(game);
 		updateGame(game)
 		navigate('/myTrivia');
 	};
 
 	const HandleCreateGame = async () => {
-		await AddAllForGame(game);
+		const newGame = await AddAllForGame(game);
+		addGame(newGame);
 		navigate('/myTrivia');
-
 	};
 
 	function changeValue(path, key, value) {
 		let current = game
+		
 		for (let i = 0; i < path.length; i++) {
 			current = current[path[i]]
 			if (i == path.length - 1) {
 				current[key] = value
-				// console.log(current)
-				// console.log(game)
 				return
 			}
 		}
@@ -47,19 +47,21 @@ function TriviaReviewPage() {
 	return (
 		<div>
 			<title>Trivia Review</title>
+
 			<div className="trivia-review-container">
 				<h1 className="trivia-review-heading">Review and Edit Trivia Questions</h1>
 				{categories.map((cat, index) => (
 					<div key={index} className="category-container">
 						<label className="input-label">Category Name:</label>
 						<input type="text" className="input-field" value={cat.title || cat.name} readOnly />
-						<Categories category={cat} index={index} changeValue={changeValue} isMultipleChoice={isMultipleChoice}/>
+						<ReviewCategories category={cat} index={index} changeValue={changeValue} isMultipleChoice={isMultipleChoice}/>
 					</div>
 				))}
 			</div>
+
 			<div className="trivia-button-container">
 				{page === 'edit' ? (
-					<Button variant="primary" onClick={HandleSaveGame} className="trivia-review-button">
+					<Button variant="primary" onClick={HandleUpdateGame} className="trivia-review-button">
 						Save Changes
 					</Button>
 				) : (
