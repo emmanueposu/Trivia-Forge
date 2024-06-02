@@ -5,9 +5,9 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
-import UnorderedCategoriesList from "../components/UnorderedCategoriesList";
-import QuestionsCount from "../components/QuestionsCount";
-import Slideshow from "../components/Slideshow";
+import UnorderedCategoriesList from "../Components/UnorderedCategoriesList";
+import QuestionsCount from "../Components/QuestionsCount";
+import Slideshow from "../Components/Slideshow";
 import Modal from 'react-bootstrap/Modal';
 import { Link, useNavigate } from "react-router-dom";
 import useStore from '../hooks/useStore';
@@ -52,7 +52,7 @@ function MyTriviaPage() {
         }
     }, [userGames]);
 
-    function handleGameShow (game) {
+    function handleGameShow(game) {
         setCurrentGame(game);
         setShowGame(true);
     };
@@ -81,7 +81,7 @@ function MyTriviaPage() {
             <title>My Trivia</title>
 
             <div className="justify-content-center align-items-center" style={{ height: "50rem", display: spinnerDisplay }}>
-                <Spinner animation="border" role="status" variant="warning" className="" style={{ height: "9rem", width: "9rem"}} />
+                <Spinner animation="border" role="status" variant="warning" className="" style={{ height: "9rem", width: "9rem" }} />
             </div>
             {/* check if there are games to display */}
             {userGames.length > 0 && (
@@ -132,7 +132,7 @@ function MyTriviaPage() {
                     <Button variant="secondary" onClick={handleWarningClose}>
                         No
                     </Button>
-                    
+
                     <Button variant="primary" onClick={() => handleDelete(currentGame)}>
                         Yes
                     </Button>
@@ -142,7 +142,7 @@ function MyTriviaPage() {
             <Modal show={showGame} onHide={handleGameClose} fullscreen={true}>
                 <Modal.Header data-bs-theme="dark" closeButton style={{ backgroundColor: "#240046", border: "none" }}>
                 </Modal.Header>
-                
+
                 <Modal.Body style={{ backgroundColor: "#240046" }}>
                     <Slideshow data={currentGame} />
                 </Modal.Body>

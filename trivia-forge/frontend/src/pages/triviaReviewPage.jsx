@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom'; // used to access passed state
-import ReviewCategories from '../components/ReviewCategories';
+import ReviewCategories from '../Components/ReviewCategories';
 import { Button } from 'react-bootstrap';
 import { AddAllForGame, UpdateAllForGame } from '../services/saveGameService';
 import { useNavigate } from "react-router-dom";
@@ -16,7 +16,7 @@ function TriviaReviewPage() {
 	const navigate = useNavigate();
 	const updateGame = useStore(state => state.updateGame);
 	const addGame = useStore(state => state.addGame);
-	
+
 	console.log(game)
 
 	const HandleUpdateGame = async () => {
@@ -33,7 +33,7 @@ function TriviaReviewPage() {
 
 	function changeValue(path, key, value) {
 		let current = game
-		
+
 		for (let i = 0; i < path.length; i++) {
 			current = current[path[i]]
 			if (i == path.length - 1) {
@@ -54,7 +54,7 @@ function TriviaReviewPage() {
 					<div key={index} className="category-container">
 						<label className="input-label">Category Name:</label>
 						<input type="text" className="input-field" value={cat.title || cat.name} readOnly />
-						<ReviewCategories category={cat} index={index} changeValue={changeValue} isMultipleChoice={isMultipleChoice}/>
+						<ReviewCategories category={cat} index={index} changeValue={changeValue} isMultipleChoice={isMultipleChoice} />
 					</div>
 				))}
 			</div>
