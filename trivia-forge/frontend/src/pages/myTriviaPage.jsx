@@ -62,14 +62,12 @@ function MyTriviaPage() {
 
     function handleShowWarning(game) {
         setCurrentGame(game);
-        console.log("current game", currentGame);
         setShowWarning(true);
     };
     function handleWarningClose() {
         setShowWarning(false);
     };
     function handleDelete() {
-        console.log("deleting game", currentGame);
         deleteGame(currentGame).then(res => {
             setUserGames(userGames.filter(g => g.id !== currentGame.id));
         });

@@ -11,12 +11,9 @@ import SignUpPage from './pages/signUpPage';
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-let signedIn = false;
 
 function App() {
-  const [count, setCount] = useState(0)
   return (
-
     <div className="App">
       <BrowserRouter>
 
@@ -40,7 +37,6 @@ function App() {
         </footer>
       </BrowserRouter>
     </div>
-
   )
 }
 

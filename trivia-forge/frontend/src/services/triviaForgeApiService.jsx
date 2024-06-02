@@ -4,7 +4,7 @@ import { Question } from '../models/question';
 import { Category } from '../models/category';
 import { Choice } from '../models/choice';
 
-const API_URL = 'http://127.0.0.1:5000';
+const API_URL = import.meta.env.VITE_REACT_APP_API_URL;
 
 /* ************************************ User ************************************ */
 
@@ -274,10 +274,8 @@ export const editCategory = async (category) => {
 /* ************************************ Choice ************************************ */
 
 export const getChoices = async (questions) => {
-    console.log("questions:", questions)
     try {
         const response = await axios.get(`${API_URL}/choices`);
-        console.log("response.data:", response.data)
         for (let i = 0; i < response.data.length; i++) {
             if (questions[response.data[i].question_id] !== undefined) {
                 questions[response.data[i].question_id]['choices'].push(response.data[i].text);

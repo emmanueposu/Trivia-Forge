@@ -1,14 +1,14 @@
+import os
+from dotenv import load_dotenv
 from flask import Blueprint, request, jsonify
 from supabase import create_client, Client
-from dotenv import dotenv_values
 
-
+load_dotenv()
 
 bp = Blueprint('game', __name__, url_prefix='/games')
 
-config = dotenv_values("./.env")
-url: str = config.get('SUPABASE_URL')
-key: str = config.get('SUPABASE_KEY')
+url: str = os.environ.get("SUPABASE_URL")
+key: str = os.environ.get("SUPABASE_KEY")
 supabase: Client = create_client(url, key)
 
 

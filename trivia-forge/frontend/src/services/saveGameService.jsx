@@ -2,7 +2,6 @@ import * as api from './triviaForgeApiService';
 
 
 export const AddAllForGame = async (game) => {
-    console.log("start game:", game)
     try {
         // Add the game to the database
         //console.log("Adding game:", game);
@@ -38,9 +37,7 @@ export const AddAllForGame = async (game) => {
             }
             newGame.categories.push(newCategory);
         }
-
         // Return the newly created game
-        console.log("end game:", newGame)
         return newGame;
     } catch (error) {
         console.error("Error adding game, categories, questions, or choices:", error);

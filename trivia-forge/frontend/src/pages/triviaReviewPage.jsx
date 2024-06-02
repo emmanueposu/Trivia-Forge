@@ -17,8 +17,6 @@ function TriviaReviewPage() {
 	const updateGame = useStore(state => state.updateGame);
 	const addGame = useStore(state => state.addGame);
 
-	console.log(game)
-
 	const HandleUpdateGame = async () => {
 		await UpdateAllForGame(game);
 		updateGame(game)
@@ -42,7 +40,6 @@ function TriviaReviewPage() {
 			}
 		}
 	}
-
 
 	return (
 		<div>
