@@ -25,10 +25,10 @@ function SignUpPage() {
         // call addUser function to add new user to database
         const addedUser = await addUser(user);
         if (addedUser) {
-            alert('User added:', addedUser);
+            alert('Account activated!');
             navigate('/');
         } else {
-            console.error('Error adding user');
+            console.error('Error signing up');
         }
     }
 
