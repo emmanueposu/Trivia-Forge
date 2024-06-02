@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Form, Button, Card } from "react-bootstrap";
 import { addUser } from '../services/triviaForgeApiService';
-import { User } from '../Models/User';
+import { User } from '../models/user';
 
 
 function SignUpPage() {

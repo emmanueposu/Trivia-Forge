@@ -1,7 +1,7 @@
 import React from "react";
-import ReviewChoices from "../Components/ReviewChoices";
+import ReviewChoices from "../components/ReviewChoices";
 import { Card } from "react-bootstrap";
-import { Question } from "../Models/Question";
+import { Question } from "../models/question";
 
 
 //logic for button to generate new question
