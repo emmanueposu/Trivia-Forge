@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom'; // used to access passed state
-import ReviewCategories from '../Components/ReviewCategories';
+import ReviewCategories from '../components/ReviewCategories';
 import { Button } from 'react-bootstrap';
 import { AddAllForGame, UpdateAllForGame } from '../services/saveGameService';
 import { useNavigate } from "react-router-dom";

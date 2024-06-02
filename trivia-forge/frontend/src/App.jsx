@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./Pages/HomePage";
-import Navigation from "./Components/Navigation";
-import TriviaGenPage from './Pages/TriviaGenPage';
-import TriviaReviewPage from './Pages/TriviaReviewPage';
-import MyTriviaPage from './Pages/myTriviaPage';
-import LoginPage from './Pages/LoginPage';
-import SignUpPage from './Pages/SignUpPage';
+import Home from "./pages/homePage";
+import Navigation from "./components/Navigation";
+import TriviaGenPage from './pages/triviaGenPage';
+import TriviaReviewPage from './pages/triviaReviewPage';
+import MyTriviaPage from './pages/myTriviaPage';
+import LoginPage from './pages/loginPage';
+import SignUpPage from './pages/signUpPage';
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 

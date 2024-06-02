@@ -1,5 +1,5 @@
 import React from "react";
-import ReviewQuestions from "../Components/ReviewQuestions";
+import ReviewQuestions from "../components/ReviewQuestions";
 
 
 function ReviewCategories({ category, index, changeValue, isMultipleChoice }) {
