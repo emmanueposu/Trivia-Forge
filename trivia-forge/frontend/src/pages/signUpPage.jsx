@@ -25,10 +25,10 @@ function SignUpPage() {
         // call addUser function to add new user to database
         const addedUser = await addUser(user);
         if (addedUser) {
-            alert('User added:', addedUser);
+            alert('Account activated!');
             navigate('/');
         } else {
-            console.error('Error adding user');
+            console.error('Error signing up');
         }
     }
 
@@ -41,7 +41,7 @@ function SignUpPage() {
                     <Form onSubmit={handleSubmit} className="form-group">
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
-                            <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                            <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)} required />
                             <Form.Text className="text-muted">
                                 We'll never share your email with anyone else.
                             </Form.Text>
@@ -49,17 +49,17 @@ function SignUpPage() {
 
                         <Form.Group className="mb-3" controlId="formBasicUsername">
                             <Form.Label>Username</Form.Label>
-                            <Form.Control type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+                            <Form.Control type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} required />
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                            <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicConfirmPassword">
                             <Form.Label>Confirm Password</Form.Label>
-                            <Form.Control type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+                            <Form.Control type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
                         </Form.Group>
 
                         <div className="d-flex justify-content-center">

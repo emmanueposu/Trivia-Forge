@@ -1,6 +1,12 @@
-from flask import Flask, request, jsonify
+import os
+from dotenv import load_dotenv
+from flask import Flask
 from endpoints import home, user, game, category, question, choice
 from flask_cors import CORS
+
+load_dotenv()
+
+host = os.environ.get("HOST")
 
 
 app = Flask(__name__)
@@ -15,4 +21,4 @@ app.register_blueprint(choice.bp)
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host=host, port=5000, debug=True)

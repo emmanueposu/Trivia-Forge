@@ -33,7 +33,7 @@ function Home() {
 
                 <Row>
                     <Col>
-                        <Button variant="primary" onClick={() => navigate('/triviagen')}> <FaPlusCircle /> Create New Game </Button>
+                        <Button variant="primary" onClick={() => navigate('/triviaGen')}> <FaPlusCircle /> Create New Game </Button>
                     </Col>
                 </Row>
 

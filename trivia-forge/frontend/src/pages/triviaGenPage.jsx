@@ -92,13 +92,10 @@ function TriviaGenPage() {
         }
         //create a new game and category object and add category to game
         //need to change third parameter to current User ID once Users can sign in.
-        console.log("User:", user);
         let game = new Game(Title, Theme, user.id);
-        console.log("Game:", game);
 
         for (let i = 0; i < categories.length; i++) {
             let newCategory = new Category(categories[i].name);
-            console.log(newCategory.name);
             game.addCategory(newCategory);
             //parse response from API
             let sections = responses[i]; // store trivia questions
@@ -138,13 +135,7 @@ function TriviaGenPage() {
                     newCategory.addQuestion(newQuestion);
                 }
             }
-            console.log("Category Questions:", newCategory.questions);
         }
-        console.log("Game Categories", game.categories);
-
-        // Save game to global state and local storage
-        console.log("test:", game)
-        // addGame(game);
         // state property to pass data as object to new route
         navigate('/review', { state: { game: game, page: 'review', isMultipleChoice: isMultipleChoice } });
         //console.log(completion.choices[0].message);

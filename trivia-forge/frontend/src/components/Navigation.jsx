@@ -1,7 +1,7 @@
 import React from "react";
 import { Navbar } from "react-bootstrap";
 import { Nav, Button} from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useStore from '../hooks/useStore';
 
 
@@ -20,8 +20,8 @@ function Navigation() {
             <Navbar bg="dark" data-bs-theme="dark">
                 <Nav className="me-auto">
                     <Nav.Link className="navbar-brand" href="/">Home</Nav.Link>
-                    <Nav.Link href="/triviaGen">Create New Trivia</Nav.Link>
-                    <Nav.Link href="/myTrivia">My Trivia</Nav.Link>
+                    <Nav.Link as={Link} to="/triviaGen">Create New Trivia</Nav.Link>
+                    <Nav.Link as={Link} to="/myTrivia">My Trivia</Nav.Link>
                 </Nav>
                 
                 <Nav className="me-2">
