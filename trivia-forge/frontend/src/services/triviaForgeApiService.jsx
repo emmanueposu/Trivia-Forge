@@ -339,3 +339,15 @@ export const editChoice = async (choice) => {
 }
 
 /* ************************************************************************************ */
+
+/* ************************************ ChatGPT ************************************ */
+
+export const promtChatGPT = async (message) => {
+    try {
+        const response = await axios.post(`${API_URL}/chatgpt`, message);
+        return response.data;
+    } catch (error) {
+        console.error('Failed to prompt ChatGPT');
+        return {};
+    }
+}

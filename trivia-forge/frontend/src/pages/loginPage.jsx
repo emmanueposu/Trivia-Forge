@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { React, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Button, Card } from "react-bootstrap";
 import { getUser} from '../services/triviaForgeApiService';
