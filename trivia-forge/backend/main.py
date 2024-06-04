@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 from flask import Flask
-from endpoints import home, user, game, category, question, choice
+from endpoints import home, user, game, category, question, choice, chatgpt
 from flask_cors import CORS
 
 load_dotenv()
@@ -18,6 +18,7 @@ app.register_blueprint(game.bp)
 app.register_blueprint(category.bp)
 app.register_blueprint(question.bp)
 app.register_blueprint(choice.bp)
+app.register_blueprint(chatgpt.bp)
 
 
 if __name__ == '__main__':

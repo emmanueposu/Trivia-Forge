@@ -1,22 +1,12 @@
 import React, { useState } from "react"; // variables that cause the component to re-render when they change
-import OpenAI from "openai";
-import { Game } from "../models/game";
 import { useNavigate } from "react-router-dom";
-import { Question } from "../models/question";
-import { Choice } from "../models/choice";
-import { Category } from "../models/category";
 import { Card } from "react-bootstrap";
 import useStore from '../hooks/useStore'; // global state management
 import Spinner from 'react-bootstrap/Spinner';
 import Button from 'react-bootstrap/Button';
 import GenerateButtonTooltip from "../components/GenerateButtonTooltip";
+import { promtChatGPT } from "../services/triviaForgeApiService";
 
-// initialize openai client using configuration specified in vite environment variables 
-// reference: https://platform.openai.com/docs/api-reference/making-requests
-const openai = new OpenAI({
-    apiKey: import.meta.env.VITE_REACT_APP_OPENAI_API_KEY, // vite does not process 'process.env' like Create React APP, use import.meta.env
-    dangerouslyAllowBrowser: true // set to true to enable local testing (not recommended for production)
-});
 
 function TriviaGenPage() {
     // state hooks for managaing number of questions and catergory input by user 
@@ -59,86 +49,18 @@ function TriviaGenPage() {
         setSubmitBtnLabel("Generating...")
         setSpinnerVisibility("")
 
-        let responses = []
-
-        for (let i = 0; i < categories.length; i++) {
-            let prompt = `Generate ${numberOfQuestions} trivia questions that have an overall theme of ${Theme} about ${categories[i].name}.`;
-            if (isMultipleChoice) {
-                prompt += "Each question should be in the format Question:...\nChoice:...\nChoice:...\nChoice:...\nChoice:...\nAnswer:...\nHint:...\n---\nQuestion:... ect. Do not include A), B), C), or D) in the choices.";
-            } else {
-                prompt += "Each question should be in the format \nQuestion:...\nAnswer:...\nHint:...\n---\nQuestion:... ect.";
-            }
-
-            // api call
-            try {
-
-                // API call to OpenAI
-                const completion = await openai.chat.completions.create({
-                    model: "gpt-3.5-turbo",
-                    messages: [{ role: "user", content: prompt }],
-                    // adjust and use token limit if necessary
-                    // max_tokens: 200
-                    // implment and adjust temperature if needed
-                    // temperature scale is 0-1 and used to tune randomness of output
-                    // temperature: .5
-                });
-                let response = completion.choices[0].message.content.split('\n');
-
-                responses.push(response);
-            }
-            catch (error) {
-                console.error('Error calling OpenAI API:', error);
-            }
+        const message =  {
+            'categories': categories,
+            'numberOfQuestions': numberOfQuestions,
+            'Theme': Theme,
+            'isMultipleChoice': isMultipleChoice,
+            'Title': Title,
+            'user': user
         }
-        //create a new game and category object and add category to game
-        //need to change third parameter to current User ID once Users can sign in.
-        let game = new Game(Title, Theme, user.id);
-
-        for (let i = 0; i < categories.length; i++) {
-            let newCategory = new Category(categories[i].name);
-            game.addCategory(newCategory);
-            //parse response from API
-            let sections = responses[i]; // store trivia questions
-            for (let i = 0; i < sections.length; i++) {
-                if (sections[i] === '') { sections.splice(i, 1); }
-            }
-            //loop through sections and create question and choice objects
-            if (isMultipleChoice) {
-                for (let i = 0; i < sections.length; i += 7) {
-                    let question = sections[i].slice(10);
-                    let choices = [];
-                    for (let k = 0; k < 4; k++) {
-                        let choice = sections[i + k + 1];
-                        let newChoice = new Choice(choice.slice(8));
-                        choices.push(newChoice);
-                    }
-                    let answer = sections[i + 5].slice(8);
-                    let hint = sections[i + 6].slice(6);
-
-                    //create question object and add it to category
-                    let newQuestion = new Question(question, answer, hint, isMultipleChoice);
-                    newCategory.addQuestion(newQuestion);
-
-                    //add choices to question object
-                    for (let i = 0; i < choices.length; i++) {
-                        newQuestion.addChoice(choices[i]);
-                    }
-                }
-            } else {
-                for (let j = 0; j < sections.length; j += 3) {
-                    let question = sections[j].slice(10);
-                    let answer = sections[j + 1].slice(8);
-                    let hint = sections[j + 2].slice(6);
-
-                    //create question object and add it to category
-                    let newQuestion = new Question(question, answer, hint, isMultipleChoice);
-                    newCategory.addQuestion(newQuestion);
-                }
-            }
-        }
+        
+        let game = await promtChatGPT(message)
         // state property to pass data as object to new route
         navigate('/review', { state: { game: game, page: 'review', isMultipleChoice: isMultipleChoice } });
-        //console.log(completion.choices[0].message);
     };
     // render component as a form
     return (
