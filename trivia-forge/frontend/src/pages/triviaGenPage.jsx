@@ -1,4 +1,4 @@
-import React, { useState } from "react"; // variables that cause the component to re-render when they change
+import { React, useState } from "react"; // variables that cause the component to re-render when they change
 import { useNavigate } from "react-router-dom";
 import { Card } from "react-bootstrap";
 import useStore from '../hooks/useStore'; // global state management
