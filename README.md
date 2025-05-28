@@ -15,6 +15,7 @@ PostgreSQL database
 https://trivia-forge.onrender.com
 
 ## Screenshots
-![Home Page](https://yxdrsdfocuonvorowgaa.supabase.co/storage/v1/object/sign/readme.md/homepage.PNG?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJyZWFkbWUubWQvaG9tZXBhZ2UuUE5HIiwiaWF0IjoxNzE3MzM3ODI5LCJleHAiOjMzMjIxODAxODI5fQ.xZmcZMzwmbCg2d4KAUV2Rljn7gKNONawS_h4Hdy0gas&t=2024-06-02T14%3A17%3A09.538Z)\
+![Home Page](https://github.com/user-attachments/assets/68bfe732-ed06-444d-90c6-47ad8a2c48fc)\
 \
-![Game Play](https://yxdrsdfocuonvorowgaa.supabase.co/storage/v1/object/sign/readme.md/gameplay.PNG?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJyZWFkbWUubWQvZ2FtZXBsYXkuUE5HIiwiaWF0IjoxNzE3MzM4MDMxLCJleHAiOjMzMjIxODAyMDMxfQ.fVkeGYVkkaKZfHFC6EC7jtiwsEwODnaIx6enHhmouG8&t=2024-06-02T14%3A20%3A31.742Z)
+![Game Play](https://github.com/user-attachments/assets/6ffe90b9-cdb4-4080-87d9-9021d55aceb4)
+
